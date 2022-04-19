@@ -1,7 +1,12 @@
 .hero-banner {
   width: 100%;
   background-color: aliceblue;
-  min-height: 200px;
+  min-height: 600px;
+  color: #000;
   padding-top: 60px;
   padding-left: 100px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-image: url('//cdn.shopify.com/s/files/1/0266/9379/6048/files/4612da0adc113d6cc7a5bb9fc42b9643_1_1920x.progressive.jpg?v=1615289490');
 }

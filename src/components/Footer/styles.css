@@ -1,0 +1,14 @@
+.page-footer{
+    background-color: black;
+    color: white;
+}
+
+footer a{
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+footer a:hover{
+    color:aqua
+}

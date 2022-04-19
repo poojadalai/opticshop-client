@@ -1,10 +1,13 @@
 import React from "react";
-import NavbarItem from "./NavbarItem";
+import { BsPersonFill } from "react-icons/bs";
+import { Nav } from "react-bootstrap";
 
 export default function LoggedOut() {
   return (
     <>
-      <NavbarItem path="/login" linkText="Login" />
+      <Nav.Link href="/login" className="nav-icons" style={{ color: "white" }}>
+        <BsPersonFill />
+      </Nav.Link>
     </>
   );
 }

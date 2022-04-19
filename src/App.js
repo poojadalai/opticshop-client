@@ -7,17 +7,14 @@ import Loading from "./components/Loading";
 import MessageBox from "./components/MessageBox";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
-
+import Products from "./pages/Products";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
 import HeroBanner from "./components/HeroBanner";
+import Footer from "./components/Footer";
+import "./App.css";
 
-const Home = () => (
-  <HeroBanner>
-    <h1>Home</h1>
-  </HeroBanner>
-);
 const Other = () => (
   <HeroBanner>
     <h1>Other</h1>
@@ -38,11 +35,13 @@ function App() {
       <MessageBox />
       {isLoading ? <Loading /> : null}
       <Routes>
-        <Route exact path="/" element={<Home />} />
+        <Route path="/" element={<Products />} />
         <Route path="/other" element={<Other />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
       </Routes>
+
+      <Footer />
     </div>
   );
 }

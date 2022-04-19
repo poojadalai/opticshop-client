@@ -1,0 +1,21 @@
+.nav-text {
+  font-size: 1.2rem;
+}
+.logo {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+  font-size: 1.9rem !important;
+}
+.nav-icons {
+  display: flex;
+  align-items: centre;
+  font-size: 25px;
+}
+
+/* Small devices (Phones, 600pxand down) -- this would display the text at 5.0rem on phones */
+
+@media only screen and (max-width: 600px) {
+  .nav-text {
+    font-size: 1rem;
+  }
+}
