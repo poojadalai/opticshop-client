@@ -1,0 +1,23 @@
+.details-container {
+  font-family: Franklin Gothic Medium ", " Arial Narrow, Arial, sans-serif;
+}
+
+.sml-img {
+  width: 208px;
+}
+
+.prod {
+  height: 200px;
+  width: 250px;
+  background-position: contain;
+}
+
+
+@media screen and (max-width: 650px) {
+  .sml-img {
+    width: 116px;
+  }
+  .image {
+    width: 350px;
+  }
+}

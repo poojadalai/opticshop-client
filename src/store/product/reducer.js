@@ -1,8 +1,8 @@
-
-import { LIST_OF_PRODUCTS } from "./actions";
+import { LIST_OF_PRODUCTS, PRODUCT_DETAILS } from "./actions";
 
 const initialState = {
   products: [],
+  details: null,
 };
 
 export default function productReducer(state = initialState, action) {
@@ -12,6 +12,13 @@ export default function productReducer(state = initialState, action) {
       return {
         ...state,
         products: payload,
+      };
+    }
+
+    case PRODUCT_DETAILS: {
+      return {
+        ...state,
+        details: payload,
       };
     }
     default: {
