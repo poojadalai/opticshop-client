@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default function Items(props) {
   return (
@@ -8,9 +9,13 @@ export default function Items(props) {
       <Card.Body className="center">
         <Card.Title>{props.name}</Card.Title>
         <Card.Text>€{props.price},00</Card.Text>
-        <Button className="center" variant="success">
-          See Product
-        </Button>
+        <h1 style={{ backgroundColor: props.frameColor }}>{props.color}</h1>
+        <h2>{props.gender}</h2>
+        <Link to={`/products/${props.id}`}>
+          <Button className="center" variant="success">
+            See Product
+          </Button>
+        </Link>
       </Card.Body>
     </Card>
   );

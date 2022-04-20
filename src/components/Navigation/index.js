@@ -40,8 +40,7 @@ export default function Navigation() {
             className="me-auto my-2 my-lg-0"
             style={{ maxHeight: "100px" }}
             navbarScroll
-            fill
-          >
+            fill>
             <NavbarItem path="/" linkText="HOME" />
             <NavbarItem path="/brands" linkText="BRANDS" />
             <NavbarItem path="/aboutus" linkText="ABOUTUS" />
@@ -61,7 +60,7 @@ export default function Navigation() {
             className="nav-icons"
             style={{ color: "white", padding: "0px" }}
           >
-            <BsCartFill />
+            <BsCartFill /><spa>0</spa>
           </Nav.Link>
         </Navbar.Collapse>
       </Container>

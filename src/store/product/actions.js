@@ -4,14 +4,20 @@ import {
   appDoneLoading,
   showMessageWithTimeout,
 } from "../appState/actions";
+
 export const LIST_OF_PRODUCTS = "LIST_OF_PRODUCTS";
-export const ARTWORK_DETAILS = "ARTWORK_DETAILS";
+export const PRODUCT_DETAILS = "ARTWORK_DETAILS";
 export const ADD_LIKE = "ARTWORK_DETAILS";
 export const CREATE_ARTWORK = "CREATE_ARTWORK";
 const API_URL = "http://localhost:4000";
 
 export const getListOfArtworks = (product) => ({
   type: LIST_OF_PRODUCTS,
+  payload: product,
+});
+
+export const getArtworkDetails = (product) => ({
+  type: PRODUCT_DETAILS,
   payload: product,
 });
 
@@ -24,7 +30,22 @@ export const getProducts = () => {
       dispatch(getListOfArtworks(products.data));
       dispatch(appDoneLoading());
     } catch (e) {
-      console.log(e.message);
+      console.error(e.message);
+    }
+    dispatch(appDoneLoading());
+  };
+};
+
+//get product by id thunk
+export const getProductById = (id) => {
+  return async (dispatch, getState) => {
+    dispatch(appLoading());
+    try {
+      const product = await axios.get(`${API_URL}/products/${id}`);
+      dispatch(getArtworkDetails(product.data));
+      dispatch(appDoneLoading());
+    } catch (e) {
+      console.error(e.message);
     }
     dispatch(appDoneLoading());
   };
