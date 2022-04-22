@@ -9,7 +9,6 @@ import { selectCart } from "../../store/product/selectors";
 import "./cart.css";
 import { MdDelete } from "react-icons/md";
 import { Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 export default function Cart() {
