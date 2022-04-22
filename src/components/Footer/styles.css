@@ -1,14 +1,21 @@
-.page-footer{
-    background-color: black;
-    color: white;
+.page-footer {
+  background-color: black;
+  color: white;
 }
 
-footer a{
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
+footer a {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
 }
 
-footer a:hover{
-    color:aqua
+footer a:hover {
+  color: aqua;
+}
+footer {
+  /* position: fixed; */
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  align-items: flex-end;
 }

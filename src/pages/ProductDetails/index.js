@@ -1,27 +1,30 @@
 import React, { useEffect } from "react";
-import { Badge, Card, Button, Col, Container, Row } from "react-bootstrap";
+import { Badge, Button, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getProductById } from "../../store/product/actions";
-import { selectDetails } from "../../store/product/selectors";
+import { addToCart, getProductById } from "../../store/product/actions";
+import { selectCart, selectDetails } from "../../store/product/selectors";
 import "./style.css";
-import { AiOutlinePlus } from "react-icons/ai";
 export default function ProductDetails() {
   const { id } = useParams();
   const details = useSelector(selectDetails);
+  const cart = useSelector(selectCart);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getProductById(id));
   }, [dispatch, id]);
 
-  const handleClick = (id) => {};
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
 
   if (!details) return <p>loading</p>;
   return (
     <div>
       <Container className="details-container">
-        <Row className="col-sm-8 m-md-4 w-100">
+        <Row className="col-lg-8 m-md-4 w-100">
           <Col sm={6}>
             <Col>
               <img
@@ -34,19 +37,19 @@ export default function ProductDetails() {
               <Row>
                 <div className="container-fluid text-center">
                   <div className="row">
-                    <div className="col-lg-4 d-flex">
+                    <div className="col-sm-4 d-flex">
                       <img
-                        className="sml-img"
+                        className="sml-img img-thumbnail"
                         src={details.images[0].image_url}
                         alt="small post"
                       ></img>
                       <img
-                        className="sml-img"
+                        className="sml-img img-thumbnail"
                         src={details.images[1].image_url}
                         alt="small post"
                       ></img>
                       <img
-                        className="sml-img"
+                        className="sml-img img-thumbnail"
                         src={details.images[2].image_url}
                         alt="small post"
                       ></img>
@@ -56,9 +59,9 @@ export default function ProductDetails() {
               </Row>
             </Col>
           </Col>
-          <Col sm={4}>
+          <Col lg={5}>
             <h4 className="text-uppercase">
-              <Badge bg="info">{details.brand.name} EYEWEAR</Badge>
+              <Badge bg="secondary">{details.brand.name} EYEWEAR</Badge>
             </h4>
             <div className="col-lg-8">
               <h1>
@@ -99,7 +102,7 @@ export default function ProductDetails() {
             </div>
             <Button
               onClick={() => {
-                handleClick(details.id);
+                dispatch(addToCart(details));
               }}
               variant="primary"
             >

@@ -25,6 +25,7 @@ export default function FrameFilter(props) {
         checked={isCheckedBlack}
         onChange={fun}
         label="Black"
+        id="fc1"
       />
 
       <Form.Check
@@ -34,6 +35,7 @@ export default function FrameFilter(props) {
         checked={isCheckedHavana}
         onChange={fun}
         label="Havana"
+        id="fc2"
       />
 
       <Form.Check
@@ -43,6 +45,7 @@ export default function FrameFilter(props) {
         checked={isCheckedGold}
         onChange={fun}
         label="Gold"
+        id="fc3"
       />
 
       <Form.Check
@@ -52,6 +55,7 @@ export default function FrameFilter(props) {
         checked={isCheckedPink}
         onChange={fun}
         label="Pink"
+        id="fc4"
       />
 
       <Form.Check
@@ -61,6 +65,7 @@ export default function FrameFilter(props) {
         checked={isCheckedRose}
         onChange={fun}
         label="Rose"
+        id="fc5"
       />
 
       <Form.Check
@@ -70,6 +75,7 @@ export default function FrameFilter(props) {
         checked={isCheckedGray}
         onChange={fun}
         label="Gray"
+        id="fc6"
       />
       <Form.Check
         type="checkbox"
@@ -78,22 +84,25 @@ export default function FrameFilter(props) {
         checked={isCheckedRed}
         onChange={fun}
         label="Red"
+        id="fc7"
       />
-      <Form
+      <Form.Check
         type="checkbox"
         value="silver"
         name="color"
         checked={isCheckedSilver}
         onChange={fun}
         label="Silver"
+        id="fc6"
       />
-      <Form
+      <Form.Check
         type="checkbox"
         value="brown"
         name="color"
         checked={isCheckedBrown}
         onChange={fun}
         label="Brown"
+        id="fc9"
       />
     </Form>
   );

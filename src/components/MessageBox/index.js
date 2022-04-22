@@ -11,13 +11,15 @@ export default function MessageBox() {
   if (!showMessage) return null;
 
   return (
-    <Alert
-      show={showMessage}
-      variant={message.variant}
-      dismissible={message.dismissable}
-      onClose={message.dismissable ? () => dispatch(clearMessage()) : null}
-    >
-      {message.text}
-    </Alert>
+    <div style={{ position: "fixed", width: "100%", top: 0 }}>
+      <Alert
+        show={showMessage}
+        variant={message.variant}
+        dismissible={message.dismissable}
+        onClose={message.dismissable ? () => dispatch(clearMessage()) : null}
+      >
+        {message.text}
+      </Alert>
+    </div>
   );
 }
