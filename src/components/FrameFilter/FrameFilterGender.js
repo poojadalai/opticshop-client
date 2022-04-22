@@ -6,14 +6,15 @@ export default function FrameFilter(props) {
   return (
     <Form>
       <h5>{title}</h5>
-
       <Form.Check
+        inline
         type="checkbox"
         value="man"
         name="gender"
         checked={isCheckedMan}
         onChange={fun}
         label="Man"
+        id="g1"
       />
 
       <Form.Check
@@ -23,6 +24,7 @@ export default function FrameFilter(props) {
         checked={isCheckedWoman}
         onChange={fun}
         label="Woman"
+        id="g2"
       />
 
       <Form.Check
@@ -32,6 +34,7 @@ export default function FrameFilter(props) {
         checked={isCheckedUniSex}
         onChange={fun}
         label="Unisex"
+        id="g3"
       />
     </Form>
   );

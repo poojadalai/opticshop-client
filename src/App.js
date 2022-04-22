@@ -15,6 +15,7 @@ import HeroBanner from "./components/HeroBanner";
 import Footer from "./components/Footer";
 import "./App.css";
 import ProductDetails from "./pages/ProductDetails";
+import Cart from "./pages/Cart";
 
 const Other = () => (
   <HeroBanner>
@@ -41,6 +42,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/products/:id" element={<ProductDetails />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
 
       <Footer />

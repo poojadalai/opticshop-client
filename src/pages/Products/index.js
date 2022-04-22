@@ -64,9 +64,7 @@ export default function Products() {
 
   return (
     <div>
-      <HeroBanner>
-        <h1>Home</h1>
-      </HeroBanner>
+      <HeroBanner></HeroBanner>
       <About />
       <div className="content">
         <Container>
@@ -106,9 +104,7 @@ export default function Products() {
                         url={item.images[0].image_url}
                         name={item.name}
                         price={item.price}
-                        color={item.frameColor}
-                        frameColor={item.frameColor}
-                        gender={item.gender}
+                        item={item}
                       />
                     );
                   })}

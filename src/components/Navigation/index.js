@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { useSelector } from "react-redux";
@@ -7,32 +7,37 @@ import NavbarItem from "./NavbarItem";
 import LoggedIn from "./LoggedIn";
 import LoggedOut from "./LoggedOut";
 import { BsCartFill } from "react-icons/bs";
-import { Button, Container, Form, FormControl } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import "./styles.css";
+import { selectCart } from "../../store/product/selectors";
 
 export default function Navigation() {
   const token = useSelector(selectToken);
-
   const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
+  const cart = useSelector(selectCart);
+
+  Object.size = function (obj) {
+    var size = 0,
+      key;
+    for (key in obj) {
+      if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+  };
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  var retrievedObject = localStorage.getItem("cart");
+  const varrr = JSON.parse(retrievedObject);
+  var size = Object.size(varrr);
+  console.log(size);
 
   return (
-    // <Navbar bg="light" expand="lg">
-    //   <Navbar.Brand as={NavLink} to="/">
-    //     YOUR PROJECT NAME
-    //   </Navbar.Brand>
-    //   <Navbar.Toggle aria-controls="basic-navbar-nav" />
-    //   <Navbar.Collapse id="basic-navbar-nav">
-    //     <Nav style={{ width: "100%" }} fill>
-    //       <NavbarItem path="/" linkText="Home" />
-    //       <NavbarItem path="/other" linkText="Other" />
-    //       {loginLogoutControls}
-    //     </Nav>
-    //   </Navbar.Collapse>
-    // </Navbar>
     <Navbar bg="dark" expand="lg" variant="dark" md={8}>
-      <Container fluid className="nav-text">
-        <Navbar.Brand className="logo" href="/">
-          The Optic Shop
+      <Container className="">
+        <Navbar.Brand className="" href="/">
+          TheOpticShop
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
@@ -40,12 +45,13 @@ export default function Navigation() {
             className="me-auto my-2 my-lg-0"
             style={{ maxHeight: "100px" }}
             navbarScroll
-            fill>
+            fill
+          >
             <NavbarItem path="/" linkText="HOME" />
             <NavbarItem path="/brands" linkText="BRANDS" />
             <NavbarItem path="/aboutus" linkText="ABOUTUS" />
           </Nav>
-          <Form className="d-flex">
+          {/* <Form className="d-flex">
             <FormControl
               type="search"
               placeholder="Search"
@@ -53,14 +59,17 @@ export default function Navigation() {
               aria-label="Search"
             />
             <Button variant="outline-light">SEARCH</Button>
-          </Form>
+          </Form> */}
           {loginLogoutControls}
           <Nav.Link
             href="/cart"
-            className="nav-icons"
+            className="nav-icons text-center"
             style={{ color: "white", padding: "0px" }}
           >
-            <BsCartFill /><spa>0</spa>
+            <div>
+              <BsCartFill />
+              {cart.length}
+            </div>
           </Nav.Link>
         </Navbar.Collapse>
       </Container>
