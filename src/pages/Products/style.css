@@ -32,6 +32,7 @@ body {
 .aLink:focus,
 .aLink:active {
   text-decoration: none;
+  color: #000;
 }
 
 .card:hover {

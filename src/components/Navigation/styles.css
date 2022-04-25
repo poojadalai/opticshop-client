@@ -9,9 +9,23 @@
 .nav-icons {
   display: flex;
   align-items: centre;
-  font-size: 25px;
+  font-size: 24px;
 }
-
+.badge {
+  font-size: 28px !important;
+}
+.badge:after {
+  content: attr(value);
+  font-size: 18px;
+  color: #fff;
+  background: #0d6efd;
+  border-radius: 50%;
+  padding: 0 5px;
+  position: relative;
+  left: -8px;
+  top: -10px;
+  opacity: 0.9;
+}
 
 /* Small devices (Phones, 600pxand down) -- this would display the text at 5.0rem on phones */
 

@@ -4,6 +4,7 @@ import { orderData } from "../../store/user/actions";
 import { selectCart } from "../../store/product/selectors";
 import { Container, Button } from "react-bootstrap";
 export default function Order() {
+  
   const [name, setName] = useState();
   const [company, setCompany] = useState();
   const [address, setAddress] = useState();
@@ -45,33 +46,6 @@ export default function Order() {
   }
 
   return (
-    // <div style={{ padding: "100px" }}>
-    //   <form action="/action_page.php" onSubmit={submitForm}>
-    //     <div>
-    //       {" "}
-    //       <label htmlFor="address">address</label>
-    //       <input
-    //         type="text"
-    //         name="address"
-    //         placeholder="Your name.."
-    //         onChange={(event) => setAddress(event.target.value)}
-    //       />
-    //     </div>
-    //     <div>
-    //       {" "}
-    //       <label htmlFor="zipcode">Zipcode</label>
-    //       <input
-    //         type="text"
-    //         name="zipcode"
-    //         placeholder="zipcode"
-    //         onChange={(event) => setZipcode(event.target.value)}
-    //       />
-    //     </div>
-    //     <button type="submit" value="Submit">
-    //       Submit
-    //     </button>
-    //   </form>
-    // </div>
     <Container>
       <form class="row m-5 mr-2" onSubmit={submitForm}>
         <div class="col-md-5 mb-4">

@@ -136,9 +136,9 @@ export default function Cart() {
                                       fontSize: "14px",
                                       width: "fit-content",
                                     }}
-                                    variant="danger"
+                                    variant="secondry"
                                     // variant="outlined"
-                                    className="h-100 m-3 text-center align-item-center"
+                                    className="text-light bg-secondary h-100 m-3 text-center align-item-center"
                                     onClick={(e) => {
                                       e.preventDefault();
                                       dispatch(deleteItem(cart.id));

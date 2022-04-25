@@ -1,8 +1,10 @@
+import { Tab } from "bootstrap";
 import React, { useEffect, useState } from "react";
-import { Badge, Button, Col, Container, Row } from "react-bootstrap";
+import { Badge, Button, Col, Container, Row, Tabs } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Loading from "../../components/Loading";
+import { showMessageWithTimeout } from "../../store/appState/actions";
 import { addToCart, getProductById } from "../../store/product/actions";
 import { selectCart, selectDetails } from "../../store/product/selectors";
 import "./style.css";
@@ -21,7 +23,12 @@ export default function ProductDetails() {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  if (!details) return <p><Loading /></p>;
+  if (!details)
+    return (
+      <p>
+        <Loading />
+      </p>
+    );
   return (
     <div>
       <Container className="details-container">
@@ -36,7 +43,7 @@ export default function ProductDetails() {
             </Col>
             <Col>
               <Row>
-                <div className="container-fluid text-center">
+                <div className="container-fluid text-center mb-4">
                   <div className="row">
                     <div className="col-sm-4 d-flex">
                       <img
@@ -67,38 +74,101 @@ export default function ProductDetails() {
                   </div>
                 </div>
               </Row>
+
+              <div className="col mt-5 pt-3 pb-5">
+                <h5>Product Specification </h5>
+                <hr></hr>
+                <Tabs
+                  defaultActiveKey="details"
+                  id="uncontrolled-tab-example"
+                  className="mt-3 mb-3"
+                >
+                  <Tab eventKey="details" title="Details">
+                    <div className="mt-4">
+                      <h6 class="text-muted">{details.brand.desc}</h6>
+                    </div>
+                  </Tab>
+                  <Tab eventKey="specification" title="Specification">
+                    <ul class="list-inline">
+                      <li class="list-inline-item p-2 text-capitalize">
+                        Gender<div class="text-muted">{details.gender}</div>
+                      </li>
+
+                      <li class="list-inline-item p-2">
+                        Frame Material
+                        <div class="text-muted">{details.materialFrame}</div>
+                      </li>
+
+                      <li class="list-inline-item p-2">
+                        Lens Material
+                        <div class="text-muted">{details.materialLens}</div>
+                      </li>
+                    </ul>
+                  </Tab>
+                </Tabs>
+              </div>
             </Col>
           </Col>
           <Col lg={5}>
-            <h4 className="text-uppercase">{details.brand.name} EYEWEAR</h4>
-            <div className="col-lg-8">
-              <h1>{details.name}</h1>
+            <div className="text-muted text-uppercase">
+              <p>{details.brand.name} EYEWEAR</p>
             </div>
-            <div>
-              <h3>
-                {" "}
-                <Badge bg="danger">€{details.price}.00 (including VAT)</Badge>
-              </h3>
-            </div>
-            <p>{details.brand.desc}</p>
-            <h2>
-              <Badge bg="success">Form - {details.form}</Badge>
-            </h2>
 
-            <div>
-              <h5>Gender - {details.gender}</h5>
-              <h5>Frame Color - {details.frameColor}</h5>
-              <h5>Frame Material - {details.materialFrame}</h5>
-              <h5>Lens Color - {details.lensColor}</h5>
-              <h5>Lens Material- {details.materialLens}</h5>
+            <div className="col-lg-6">
+              <h5 className="font-weight-bold">
+                {details.name} <br></br>
+                <br></br>€{details.price}.00 (including VAT)
+              </h5>
             </div>
+            <br></br>
+            <div>
+              {details.lensColor !== null ? (
+                <div>
+                  {" "}
+                  <h5 className="font-weight-bold">Lens Color</h5>
+                  <ul class="list-inline d-flex">
+                    <span
+                      className="dot list-inline-item"
+                      style={{ backgroundColor: `${details.lensColor}` }}
+                    ></span>
+                    <span className="mb-0 text-capitalize">
+                      {details.lensColor}
+                    </span>
+                  </ul>
+                </div>
+              ) : (
+                " "
+              )}
+
+              <h5 className="font-weight-bold">Frame Color</h5>
+              <ul class="list-inline d-flex">
+                <span
+                  className="dot list-inline-item"
+                  style={{ backgroundColor: `${details.frameColor}` }}
+                ></span>
+                <span className="mb-0 text-capitalize">
+                  {details.frameColor}
+                </span>
+              </ul>
+            </div>
+
+            <br></br>
             <Button
               onClick={() => {
                 dispatch(addToCart(details));
+                dispatch(
+                  showMessageWithTimeout(
+                    "success",
+                    false,
+                    "Added to cart",
+                    1500
+                  )
+                );
               }}
-              variant="primary"
+              variant="secondry"
+              className="p-2 text-light bg-secondary"
             >
-              Add to Cart
+              In the shopping cart
             </Button>
           </Col>
         </Row>
