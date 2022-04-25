@@ -8,8 +8,8 @@ export const UPDATE_CART = "UPDATE_CART";
 export const INCREASE_AMOUNT = "INCREASE_AMOUNT";
 export const DECREASE_AMOUNT = "DECREASE_AMOUNT";
 export const DELETE_CARTITEM = "DELETE_CARTITEM";
+export const CREATE_ORDER = "CREATE_ORDER";
 const API_URL = "http://localhost:4000";
-
 export const getListOfArtworks = (product) => ({
   type: LIST_OF_PRODUCTS,
   payload: product,
@@ -45,6 +45,10 @@ export const deleteItem = (id) => ({
   payload: id,
 });
 
+export const orderCreated = (order) => ({
+  type: CREATE_ORDER,
+  payload: order,
+});
 //get list of products
 export const getProducts = () => {
   return async (dispatch, getState) => {

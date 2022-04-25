@@ -1,6 +1,7 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
-import { selectToken } from "./selectors";
+
+import { selectUser, selectToken } from "./selectors";
 import {
   appLoading,
   appDoneLoading,
@@ -11,6 +12,7 @@ import {
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const TOKEN_STILL_VALID = "TOKEN_STILL_VALID";
 export const LOG_OUT = "LOG_OUT";
+export const ORDER_DATA = "ORDER_DATA";
 
 const loginSuccess = (userWithToken) => {
   return {
@@ -22,6 +24,11 @@ const loginSuccess = (userWithToken) => {
 const tokenStillValid = (userWithoutToken) => ({
   type: TOKEN_STILL_VALID,
   payload: userWithoutToken,
+});
+
+const order = (order) => ({
+  type: ORDER_DATA,
+  payload: order,
 });
 
 export const logOut = () => ({ type: LOG_OUT });
@@ -102,6 +109,56 @@ export const getUserWithStoredToken = () => {
       // get rid of the token by logging out
       dispatch(logOut());
       dispatch(appDoneLoading());
+    }
+  };
+};
+
+export const orderData = (
+  cart,
+  name,
+  company,
+  address,
+  city,
+  zipcode,
+  country,
+  state,
+  phone
+) => {
+  return async (dispatch, getState) => {
+    try {
+      const { token } = selectUser(getState());
+
+      // console.log(name, content, imageUrl);
+      dispatch(appLoading());
+
+      const response = await axios.post(
+        `${apiUrl}/orders`,
+        {
+          cart,
+          name,
+          company,
+          address,
+          city,
+          zipcode,
+          country,
+          state,
+          phone,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log("from order!", response);
+      dispatch(
+        showMessageWithTimeout("success", false, response.data.message, 3000)
+      );
+      dispatch(order(response.data));
+      dispatch(appDoneLoading());
+    } catch (e) {
+      console.log(e.message);
     }
   };
 };

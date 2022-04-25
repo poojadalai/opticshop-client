@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Badge, Button, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import Loading from "../../components/Loading";
 import { addToCart, getProductById } from "../../store/product/actions";
 import { selectCart, selectDetails } from "../../store/product/selectors";
 import "./style.css";
@@ -10,6 +11,7 @@ export default function ProductDetails() {
   const details = useSelector(selectDetails);
   const cart = useSelector(selectCart);
   const dispatch = useDispatch();
+  const [replaceSrc, setReplaceSrc] = useState("");
 
   useEffect(() => {
     dispatch(getProductById(id));
@@ -19,8 +21,7 @@ export default function ProductDetails() {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-
-  if (!details) return <p>loading</p>;
+  if (!details) return <p><Loading /></p>;
   return (
     <div>
       <Container className="details-container">
@@ -30,7 +31,7 @@ export default function ProductDetails() {
               <img
                 className="image img-fluid"
                 alt="productImage"
-                src={details.images[0].image_url}
+                src={!replaceSrc ? details.images[0].image_url : replaceSrc}
               ></img>
             </Col>
             <Col>
@@ -39,16 +40,25 @@ export default function ProductDetails() {
                   <div className="row">
                     <div className="col-sm-4 d-flex">
                       <img
+                        onMouseEnter={(e) => {
+                          setReplaceSrc(details.images[0].image_url);
+                        }}
                         className="sml-img img-thumbnail"
                         src={details.images[0].image_url}
                         alt="small post"
                       ></img>
                       <img
+                        onMouseEnter={(e) => {
+                          setReplaceSrc(details.images[1].image_url);
+                        }}
                         className="sml-img img-thumbnail"
                         src={details.images[1].image_url}
                         alt="small post"
                       ></img>
                       <img
+                        onMouseEnter={(e) => {
+                          setReplaceSrc(details.images[2].image_url);
+                        }}
                         className="sml-img img-thumbnail"
                         src={details.images[2].image_url}
                         alt="small post"
@@ -60,13 +70,9 @@ export default function ProductDetails() {
             </Col>
           </Col>
           <Col lg={5}>
-            <h4 className="text-uppercase">
-              <Badge bg="secondary">{details.brand.name} EYEWEAR</Badge>
-            </h4>
+            <h4 className="text-uppercase">{details.brand.name} EYEWEAR</h4>
             <div className="col-lg-8">
-              <h1>
-                <Badge bg="secondary">{details.name}</Badge>
-              </h1>
+              <h1>{details.name}</h1>
             </div>
             <div>
               <h3>
@@ -80,25 +86,11 @@ export default function ProductDetails() {
             </h2>
 
             <div>
-              <h5>
-                <Badge bg="warning">Gender - {details.gender}</Badge>
-              </h5>
-              <h5>
-                <Badge bg="warning">Frame Color - {details.frameColor}</Badge>
-              </h5>
-              <h5>
-                <Badge bg="warning">
-                  Frame Material - {details.materialFrame}
-                </Badge>
-              </h5>
-              <h5>
-                <Badge bg="warning">Lens Color - {details.lensColor}</Badge>
-              </h5>
-              <h5>
-                <Badge bg="warning">
-                  Lens Material- {details.materialLens}
-                </Badge>
-              </h5>
+              <h5>Gender - {details.gender}</h5>
+              <h5>Frame Color - {details.frameColor}</h5>
+              <h5>Frame Material - {details.materialFrame}</h5>
+              <h5>Lens Color - {details.lensColor}</h5>
+              <h5>Lens Material- {details.materialLens}</h5>
             </div>
             <Button
               onClick={() => {

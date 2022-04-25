@@ -1,9 +1,15 @@
-import { LOG_OUT, LOGIN_SUCCESS, TOKEN_STILL_VALID } from "./actions";
+import {
+  LOG_OUT,
+  LOGIN_SUCCESS,
+  TOKEN_STILL_VALID,
+  ORDER_DATA,
+} from "./actions";
 
 const initialState = {
   token: localStorage.getItem("token"),
   name: null,
   email: null,
+  order: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -18,6 +24,12 @@ const reducer = (state = initialState, action) => {
 
     case TOKEN_STILL_VALID:
       return { ...state, ...action.payload };
+
+    // case ORDER_DATA:
+    //   return {
+    //     ...state,
+    //     order: [...state, ...action.payload],
+    //   };
 
     default:
       return state;

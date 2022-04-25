@@ -16,6 +16,8 @@ import Footer from "./components/Footer";
 import "./App.css";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
+import Order from "./pages/Order";
+import OrderHistory from "./pages/Order/OrderDetails";
 
 const Other = () => (
   <HeroBanner>
@@ -42,7 +44,9 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/products/:id" element={<ProductDetails />} />
+        <Route path="/shipping" element={<Order />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/orders" element={<OrderHistory />} />
       </Routes>
 
       <Footer />

@@ -4,6 +4,7 @@
 
 .sml-img {
   width: 208px;
+  cursor: pointer;
 }
 
 .prod {
@@ -12,12 +13,12 @@
   background-position: contain;
 }
 
-
 @media screen and (max-width: 800px) {
   .sml-img {
     width: 116px;
   }
   .image {
     width: 350px;
+    cursor: pointer;
   }
 }

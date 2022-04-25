@@ -13,6 +13,7 @@ const initialState = {
   cart: localStorage.getItem("cart")
     ? JSON.parse(localStorage.getItem("cart"))
     : [],
+  total: 0,
 };
 
 export default function productReducer(state = initialState, action) {
@@ -44,15 +45,24 @@ export default function productReducer(state = initialState, action) {
       if (!existed_item) {
         return {
           ...state,
-          cart: [...state.cart, { ...addedItem, amount: 1 }],
+          cart: [
+            ...state.cart,
+            {
+              ...addedItem,
+              amount: 1,
+              total: Number(addedItem.price),
+            },
+          ],
         };
       }
 
       const products = state.cart.map((product) => {
+        let newTotal = Number(product.total) + Number(addedItem.price);
         if (product.id === addedItem.id) {
           return {
             ...addedItem,
             amount: product.amount + 1,
+            total: newTotal,
           };
         }
         return {
@@ -102,7 +112,6 @@ export default function productReducer(state = initialState, action) {
     case DELETE_CARTITEM: {
       const id = payload;
       const newCart = state.cart.filter((product) => product.id !== id);
-      console.log(newCart);
       return {
         ...state,
         cart: newCart,

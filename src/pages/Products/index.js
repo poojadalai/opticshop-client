@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { Container, Row, Col, CardGroup, Form } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import HeroBanner from "../../components/HeroBanner";
 import Items from "../../components/Items";
 import "./style.css";
@@ -9,16 +9,15 @@ import { getProducts } from "../../store/product/actions";
 import { selectProducts } from "../../store/product/selectors";
 import About from "../../components/About";
 import FrameFilterColor from "../../components/FrameFilter/FrameFilterColor";
-
 import FrameFilterGender from "../../components/FrameFilter/FrameFilterGender";
 
 export default function Products() {
   const dispatch = useDispatch();
   const products = useSelector(selectProducts);
-
+  console.log(products);
   useEffect(() => {
     dispatch(getProducts());
-  }, []);
+  }, [dispatch]);
 
   const [frameColor, setFrameColor] = useState({
     black: false,
@@ -101,7 +100,7 @@ export default function Products() {
                       <Items
                         key={item.id}
                         id={item.id}
-                        url={item.images[0].image_url}
+                        url={item.images[2].image_url}
                         name={item.name}
                         price={item.price}
                         item={item}
