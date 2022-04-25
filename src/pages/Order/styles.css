@@ -1,0 +1,12 @@
+.icon {
+  padding-left: 35px;
+  background: url("https://static.thenounproject.com/png/101791-200.png")
+    no-repeat right;
+  background-size: 28px;
+  width: fit-content;
+  max-width: 400px;
+  margin: auto;
+  justify-content: center;
+  border-radius: 10px!important;
+  border-color: blue;
+}

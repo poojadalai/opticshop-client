@@ -44,22 +44,29 @@ export default function Navigation() {
             className="me-auto my-2 my-lg-0"
             style={{ maxHeight: "100px" }}
             navbarScroll
-            fill>
+            fill
+          >
             <NavbarItem path="/" linkText="HOME" />
             <NavbarItem path="/brands" linkText="BRANDS" />
             <NavbarItem path="/aboutus" linkText="ABOUTUS" />
-            </Nav>
-            {loginLogoutControls}
-            <Nav.Link
-              href="/cart"
-              className="nav-icons text-center"
-              style={{ color: "white", padding: "0px" }}>
-              <div style={{ marginLeft: "12px" }}>
+          </Nav>
+          {loginLogoutControls}
+          <Nav.Link
+            href="/cart"
+            className="nav-icons text-center"
+            style={{ color: "white", padding: "0px" }}
+          >
+            <div>
+              {/* <span className="cartNum"></span> */}
+              <i
+                class="fa badge fa-lg"
+             
+                value={cart.length}
+              >
                 <BsCartFill />
-                {cart.length}
-              </div>
-            </Nav.Link>
-         
+              </i>
+            </div>
+          </Nav.Link>
         </Navbar.Collapse>
       </Container>
     </Navbar>
