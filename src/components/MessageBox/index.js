@@ -11,7 +11,7 @@ export default function MessageBox() {
   if (!showMessage) return null;
 
   return (
-    <div style={{ position: "fixed", width: "100%", top: 0 }}>
+    <div>
       <Alert
         show={showMessage}
         variant={message.variant}

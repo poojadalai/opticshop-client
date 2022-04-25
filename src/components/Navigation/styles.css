@@ -12,6 +12,7 @@
   font-size: 25px;
 }
 
+
 /* Small devices (Phones, 600pxand down) -- this would display the text at 5.0rem on phones */
 
 @media only screen and (max-width: 600px) {

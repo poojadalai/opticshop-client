@@ -8,6 +8,7 @@ export default function LoggedOut() {
       <Nav.Link href="/login" className="nav-icons" style={{ color: "white" }}>
         <BsPersonFill />
       </Nav.Link>
+    
     </>
   );
 }

@@ -2,7 +2,8 @@ import {
   APP_LOADING,
   APP_DONE_LOADING,
   SET_MESSAGE,
-  CLEAR_MESSAGE
+  CLEAR_MESSAGE,
+
 } from "./actions";
 
 const initialState = {
@@ -10,7 +11,7 @@ const initialState = {
   message: null
 };
 
-export default (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case APP_LOADING:
       return { ...state, loading: true };
@@ -23,8 +24,11 @@ export default (state = initialState, action) => {
 
     case CLEAR_MESSAGE:
       return { ...state, message: null };
+      case CLEAR_MESSAGE:
+        return { ...state, message: null };
 
     default:
       return state;
   }
 };
+export default reducer

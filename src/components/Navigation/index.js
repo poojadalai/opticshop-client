@@ -30,8 +30,7 @@ export default function Navigation() {
 
   var retrievedObject = localStorage.getItem("cart");
   const varrr = JSON.parse(retrievedObject);
-  var size = Object.size(varrr);
-  console.log(size);
+  Object.size(varrr);
 
   return (
     <Navbar bg="dark" expand="lg" variant="dark" md={8}>
@@ -45,32 +44,22 @@ export default function Navigation() {
             className="me-auto my-2 my-lg-0"
             style={{ maxHeight: "100px" }}
             navbarScroll
-            fill
-          >
+            fill>
             <NavbarItem path="/" linkText="HOME" />
             <NavbarItem path="/brands" linkText="BRANDS" />
             <NavbarItem path="/aboutus" linkText="ABOUTUS" />
-          </Nav>
-          {/* <Form className="d-flex">
-            <FormControl
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-light">SEARCH</Button>
-          </Form> */}
-          {loginLogoutControls}
-          <Nav.Link
-            href="/cart"
-            className="nav-icons text-center"
-            style={{ color: "white", padding: "0px" }}
-          >
-            <div>
-              <BsCartFill />
-              {cart.length}
-            </div>
-          </Nav.Link>
+            </Nav>
+            {loginLogoutControls}
+            <Nav.Link
+              href="/cart"
+              className="nav-icons text-center"
+              style={{ color: "white", padding: "0px" }}>
+              <div style={{ marginLeft: "12px" }}>
+                <BsCartFill />
+                {cart.length}
+              </div>
+            </Nav.Link>
+         
         </Navbar.Collapse>
       </Container>
     </Navbar>

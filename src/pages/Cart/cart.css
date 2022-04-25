@@ -64,7 +64,8 @@
   font-weight: 400;
 }
 
-.shopping-cart .items .product .info .quantity .quantity-input, .cart-btn {
+.shopping-cart .items .product .info .quantity .quantity-input,
+.cart-btn {
   margin: auto;
   width: 70px;
 }
@@ -131,12 +132,16 @@ span {
 input {
   height: 34px;
   width: 100px;
-  text-align: center;
   font-size: 26px;
   border: 1px solid #ddd;
   border-radius: 4px;
   display: inline-block;
   vertical-align: middle;
+}
+.span {
+  justify-content: center;
+  text-align: center;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
