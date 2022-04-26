@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { orderData } from "../../store/user/actions";
 import { selectCart } from "../../store/product/selectors";
-import { Container, Button } from "react-bootstrap";
-export default function Order() {
-  
+import { Container } from "react-bootstrap";
+import "../Cart/cart.css";
+import { useNavigate } from "react-router-dom";
+import { sumOfProducts } from "../../utils/product";
+export default function Checkout() {
+  const paypal = useRef();
   const [name, setName] = useState();
   const [company, setCompany] = useState();
   const [address, setAddress] = useState();
@@ -13,23 +16,25 @@ export default function Order() {
   const [country, setCountry] = useState();
   const [state, setState] = useState();
   const [phone, setPhone] = useState();
+  // const [check, setCheck] = useState(false);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
 
-  function submitForm(event) {
-    event.preventDefault();
-    console.log(
-      cart,
-      name,
-      company,
-      address,
-      city,
-      zipcode,
-      country,
-      state,
-      phone
-    );
+  const [total, setTotal] = useState(0);
+  useEffect(() => {
+    setTotal(sumOfProducts(cart));
+  }, [cart]);
 
+  // const initialOptions = {
+  //   "client-id":
+  //     "https://www.paypal.com/sdk/js?client-id=AYMB0ZeHI-m-XaosmZbeXRBBwxB2iSoZn5bL7L4dBOnC67tVMs8Mwlb2KWpMrgeRGaRemTgmhjCgGIU2",
+  //   currency: "EUR",
+  //   intent: "capture",
+  //   "data-client-token": "abc123xyz==",
+  //   "data-namespace": "paypal_sdk",
+  // };
+  function submitForm(event) {
     dispatch(
       orderData(
         cart,
@@ -43,17 +48,60 @@ export default function Order() {
         phone
       )
     );
-  }
+    setName("");
+    setCompany("");
+    setAddress("");
+    setCity("");
+    setZipcode("");
+    setCountry("");
+    setState("");
+    setPhone("");
 
+    setTimeout(() => {
+      navigate("/");
+    }, 3000);
+  }
+  useEffect(() => {
+    window.paypal_sdk
+      .Buttons({
+        createOrder: (data, actions, err) => {
+          return actions.order.create({
+            intent: "CAPTURE",
+            purchase_units: [
+              {
+                description: "Cool looking table",
+                amount: {
+                  currency_code: "EUR",
+                  value: { total },
+                },
+              },
+            ],
+          });
+        },
+        onApprove: async (data, actions) => {
+          submitForm();
+          // alert(
+          //   "You have successfully created subscription " + data.subscriptionID
+          // );
+          // const order = await actions.order.capture();
+          // console.log(order);
+        },
+        onError: (err) => {
+          console.log(err);
+        },
+      })
+      .render(paypal.current);
+  }, []);
+
+  // onSubmit={}
   return (
     <Container>
-      <form class="row m-5 mr-2" onSubmit={submitForm}>
-        <div class="col-md-5 mb-4">
-          <div class="">
+      <form class="m-5 mr-2">
+        <div class="row mb-4">
+          <div class="col ">
             <div class="header py-3">
               <h5 class="mt-2">Shipping Details</h5>
             </div>
-
             <div class="form-outline mb-3">
               <input
                 name="fullname"
@@ -62,6 +110,7 @@ export default function Order() {
                 class="form-control"
                 placeholder="Full Name"
                 onChange={(event) => setName(event.target.value)}
+                required
               />
             </div>
             <div class="form-outline mb-3">
@@ -72,6 +121,7 @@ export default function Order() {
                 class="form-control"
                 placeholder="Company"
                 onChange={(event) => setCompany(event.target.value)}
+                required
               />
             </div>
             <div class="form-outline mb-3">
@@ -82,6 +132,7 @@ export default function Order() {
                 class="form-control"
                 placeholder="Address"
                 onChange={(event) => setAddress(event.target.value)}
+                required
               />
             </div>
             <div class="row mb-4">
@@ -94,6 +145,7 @@ export default function Order() {
                     class="form-control"
                     placeholder="City"
                     onChange={(event) => setCity(event.target.value)}
+                    required
                   />
                 </div>
               </div>
@@ -106,6 +158,7 @@ export default function Order() {
                     class="form-control"
                     placeholder="Postcode"
                     onChange={(event) => setZipcode(event.target.value)}
+                    required
                   />
                 </div>
               </div>
@@ -120,6 +173,7 @@ export default function Order() {
                     class="form-control"
                     placeholder="Country"
                     onChange={(event) => setCountry(event.target.value)}
+                    required
                   />
                 </div>
               </div>
@@ -146,101 +200,71 @@ export default function Order() {
                     class="form-control"
                     placeholder="Phone"
                     onChange={(event) => setPhone(event.target.value)}
+                    required
                   />
                 </div>
               </div>
             </div>
           </div>
+          <div class="col m-md-5">
+            <div class="card  ">
+              <div class="p-3 bg-light bg-opacity-10">
+                <h6 class="card-title mb-3">Order Summary</h6>
+                <div class="d-flex justify-content-between mb-1 small">
+                  <span>Subtotal</span> <span>€{total}</span>
+                </div>
+
+                <div class="d-flex justify-content-between mb-4 small">
+                  <span>TOTAL</span> <strong class="text-dark">€{total}</strong>
+                </div>
+                <div class="form-check mb-1 small">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="tnc"
+                  />
+                  <label class="form-check-label" for="tnc">
+                    I agree to the <a href="/">terms and conditions</a>
+                  </label>
+                </div>
+                <div class="form-check mb-3 small">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="subscribe"
+                  />
+                  <label class="form-check-label" for="subscribe">
+                    Get emails about product updates and events. If you change
+                    your mind, you can unsubscribe at any time.{" "}
+                    <a href="/">Privacy Policy</a>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>{" "}
         </div>
-
-        <div class="col-md-6 mb-4">
+        {/* <Link to="/payment" >
+          checkout
+        </Link> */}
+        <div class="col-md-5 mb-4">
           <div class="header py-3">
-            <h5 class="mt-2">Payment Method</h5>
+            <h5 class="mt-2 ">Select Payment Method</h5>
           </div>
-
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="exampleRadios"
-              id="exampleRadios1"
-              value="option1"
-            />
-            <label class="form-check-label" for="exampleRadios1">
-              Credit card
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="exampleRadios"
-              id="exampleRadios2"
-              value="option2"
-            />
-            <label class="form-check-label" for="exampleRadios2">
-              Debit card
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="exampleRadios"
-              id="exampleRadios3"
-              value="option3"
-            />
-            <label class="form-check-label" for="exampleRadios3">
-              Paypal
-            </label>
-          </div>
-
-          <div class="row mb-4 mt-4">
-            <div class="col">
-              <div class="form-outline">
-                <label class="form-label" for="form7Example1">
-                  Name on card
-                </label>
-                <input type="text" class="form-control" />
-                <small id="emailHelp" class="form-text text-muted">
-                  Full name as displayed on card
-                </small>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-outline">
-                <label class="form-label" for="form7Example2">
-                  Credit card number
-                </label>
-                <input type="text" class="form-control" />
-              </div>
-            </div>
-          </div>
-          <div class="row mb-4 mt-4">
-            <div class="col">
-              <div class="form-outline">
-                <label class="form-label" for="form7Example1">
-                  Expiration
-                </label>
-                <input type="text" class="form-control" />
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-outline">
-                <label class="form-label" for="form7Example2">
-                  CVV
-                </label>
-                <input type="text" class="form-control" />
-              </div>
-            </div>
-          </div>
-          <Button
-            class="btn btn-primary btn-lg btn-block"
-            type="submit"
-            value="Submit"
+          {/* <Button
+            onClick={() => {
+              setCheck();
+            }}
           >
-            Continue to checkout
-          </Button>
+            Checkout
+          </Button> */}
+
+          {/* <PayPalScriptProvider >
+            <PayPalButtons ref={paypal} />
+          </PayPalScriptProvider> */}
+
+          <div ref={paypal}></div>
         </div>
       </form>
     </Container>

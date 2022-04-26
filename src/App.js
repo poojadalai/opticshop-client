@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import "./App.css";
-
 import { Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import Loading from "./components/Loading";
@@ -16,9 +15,9 @@ import Footer from "./components/Footer";
 import "./App.css";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
-import Order from "./pages/Order";
 import OrderHistory from "./pages/Order/OrderDetails";
-
+import Checkout from "./pages/Order/Checkout";
+import PaypalButton from "./components/PaypalButton";
 const Other = () => (
   <HeroBanner>
     <h1>Other</h1>
@@ -44,9 +43,10 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/products/:id" element={<ProductDetails />} />
-        <Route path="/shipping" element={<Order />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/orders" element={<OrderHistory />} />
+        <Route path="/payment" element={<PaypalButton />} />
       </Routes>
 
       <Footer />
