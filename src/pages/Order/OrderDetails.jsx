@@ -12,12 +12,12 @@ export default function OrderDetails() {
   return (
     <Container>
       <h3 className="text-center text-muted mt-4 p-2">My orders</h3>
-      <input
+      {/* <input
         type="text"
         className="form-control p-4 icon"
         placeholder="Search"
-      />
-      
+      /> */}
+
       {/* {data?.orders?.map((e) => ( */}
       {data?.orders?.map((e) => (
         <div

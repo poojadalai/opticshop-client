@@ -178,11 +178,11 @@ export default function Cart() {
                   </div>
 
                   <Link
-                    to={token ? "/shipping" : "/login"}
+                    to={token ? "/checkout" : "/login"}
                     type="button"
                     className="mt-5 btn btn-primary btn-lg btn-block"
                   >
-                    Continue to order
+                    Continue to checkout
                   </Link>
                 </div>
               </div>
