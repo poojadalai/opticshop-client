@@ -1,21 +1,21 @@
 # OPTIC SHOP CLIENT
 
-# Introduction
+## Introduction
 Optic Shop is an e-commerce app for glasses😎. 
 
-# Technologies used
+## Technologies
 
-## BackEnd
-  Express
-  REST
-  Sequelize
-  Postgres
-  NodeJS
+1.BackEnd
+  - Express
+  - REST
+  - Sequelize
+  - Postgres
+  - NodeJS
   
-## FrontEnd
-  ### React
-  Redux
-  Axios
-  Bootstrap
-  Material UI
+2.FrontEnd
+  - React
+  - Redux
+  - Axios
+  - Bootstrap
+  - Material UI
 
