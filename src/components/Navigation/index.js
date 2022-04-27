@@ -47,7 +47,7 @@ export default function Navigation() {
             fill
           >
             <NavbarItem path="/" linkText="HOME" />
-            <NavbarItem path="/brands" linkText="BRANDS" />
+            <NavbarItem path="/trends" linkText="TRENDS" />
             <NavbarItem path="/aboutus" linkText="ABOUTUS" />
           </Nav>
           {loginLogoutControls}

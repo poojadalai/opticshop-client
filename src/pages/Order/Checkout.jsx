@@ -72,7 +72,7 @@ export default function Checkout() {
                 description: "Cool looking table",
                 amount: {
                   currency_code: "EUR",
-                  value: { total },
+                  value: 2
                 },
               },
             ],

@@ -1,0 +1,41 @@
+.brand-banner {
+  width: 100%;
+  background-color: aliceblue;
+  min-height: 600px;
+  color: #000;
+  padding-top: 60px;
+  padding-left: 100px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-image: url("//cdn.shopify.com/s/files/1/0266/9379/6048/files/4612da0adc113d6cc7a5bb9fc42b9643_1_1920x.progressive.jpg?v=1615289490");
+}
+
+img:hover{
+    background-color: aliceblue;
+}
+
+.collection {
+
+  position: absolute !important;
+  left: 5%;
+  bottom: -45px;
+  box-shadow: 0 3px 60px #00000017;
+}
+.collection-banner {
+  background: url("//cdn.shopify.com/s/files/1/0266/9379/6048/files/ae1e8525f2d00553e8c72ce1e2acc410_5_768x.progressive.jpg?v=1636210230");
+  height: 70vh;
+  background-size: cover;
+  background-position: center center;
+}
+.logo {
+  margin-top: 0.8em;
+}
+
+@media (min-width: 768px) {
+  .collection-banner {
+    background: url("//cdn.shopify.com/s/files/1/0266/9379/6048/files/ae1e8525f2d00553e8c72ce1e2acc410_1_1920x.progressive.jpg?v=1636210054");
+    background-size: cover;
+    background-position: center center;
+  }
+}
