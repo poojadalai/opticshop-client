@@ -160,7 +160,7 @@ export default function ProductDetails() {
                   showMessageWithTimeout(
                     "success",
                     false,
-                    "Added to cart",
+                    "Item added to cart",
                     1500
                   )
                 );

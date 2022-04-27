@@ -7,11 +7,13 @@ import {
 } from "../../store/product/actions";
 import { selectCart } from "../../store/product/selectors";
 import "./cart.css";
+import { confirmAlert } from "react-confirm-alert";
 import { Container } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { sumOfProducts } from "../../utils/product";
 import { Link } from "react-router-dom";
 import { selectToken } from "../../store/user/selectors";
+import { useAlert } from "react-alert";
 
 export default function Cart() {
   const carts = useSelector(selectCart);
@@ -22,6 +24,9 @@ export default function Cart() {
   }, [carts]);
   const token = useSelector(selectToken);
   useEffect(() => {}, [carts]);
+
+  const alert = useAlert();
+
   return carts.length === 0 ? (
     <Container className="p-5">
       <h1>Your cart is empty</h1>
@@ -92,27 +97,18 @@ export default function Cart() {
                                         className="form-control quantity-input col-lg"
                                         onClick={() => {
                                           dispatch(decreaseAmount(cart.id));
+
+                                          if (cart.amount === 1)
+                                            return dispatch(
+                                              deleteItem(cart.id)
+                                            );
                                         }}
-                                        disabled={cart.amount ? false : true}
+                                        // disabled={cart.amount ? false : true}
                                       >
                                         -
                                       </button>
-                                      {/* <input
-                                        name="quantity"
-                                        type="text"
-                                        value={cart.amount}
-                                        className="form-control m-0 w-70 text-center quantity-input"
-                                      /> */}
-                                      <div
-                                        className="form-control quantity-input col-lg"
-                                        // style={{
-                                        //   width: "50px",
-                                        //   height: "34px",
-                                        //   display: "flex",
-                                        //   alignItems: "center",
-                                        //   justifyContent: "center",
-                                        // }}
-                                      >
+
+                                      <div className="form-control quantity-input col-lg">
                                         <span>{cart.amount}</span>
                                       </div>
 
@@ -141,11 +137,17 @@ export default function Cart() {
                                     className="text-light bg-secondary h-100 m-3 text-center align-item-center"
                                     onClick={(e) => {
                                       e.preventDefault();
-                                      dispatch(deleteItem(cart.id));
+                                      if (
+                                        window.confirm(
+                                          "Are you sure you want to delete this Item?"
+                                        )
+                                      ) {
+                                        dispatch(deleteItem(cart.id));
+                                      }
+                                      
                                     }}
                                   >
                                     Delete
-                                    {/* <MdDelete /> */}
                                   </Button>
                                 </div>
                               </div>

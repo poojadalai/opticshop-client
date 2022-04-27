@@ -10,19 +10,17 @@ import Products from "./pages/Products";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
-import HeroBanner from "./components/HeroBanner";
 import Footer from "./components/Footer";
 import "./App.css";
+import { positions, Provider } from "react-alert";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import OrderHistory from "./pages/Order/OrderDetails";
 import Checkout from "./pages/Order/Checkout";
 import PaypalButton from "./components/PaypalButton";
-const Other = () => (
-  <HeroBanner>
-    <h1>Other</h1>
-  </HeroBanner>
-);
+import TrendCard from "./components/TrendCard";
+import AlertTemplate from "react-alert-template-basic";
+import AboutUs from "./pages/AboutUs";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,25 +30,33 @@ function App() {
     dispatch(getUserWithStoredToken());
   }, [dispatch]);
 
-  return (
-    <div className="App">
-      <Navigation />
-      <MessageBox />
-      {isLoading ? <Loading /> : null}
-      <Routes>
-        <Route path="/" element={<Products />} />
-        <Route path="/other" element={<Other />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/products/:id" element={<ProductDetails />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/orders" element={<OrderHistory />} />
-        <Route path="/payment" element={<PaypalButton />} />
-      </Routes>
+  const options = {
+    timeout: 5000,
+    position: positions.BOTTOM_CENTER,
+  };
 
-      <Footer />
-    </div>
+  return (
+    <Provider template={AlertTemplate} {...options}>
+      <div className="App">
+        <Navigation />
+        <MessageBox />
+        {isLoading ? <Loading /> : null}
+        <Routes>
+          <Route path="/" element={<Products />} />
+          <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/products/:id" element={<ProductDetails />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/orders" element={<OrderHistory />} />
+          <Route path="/payment" element={<PaypalButton />} />
+          <Route path="/trends" element={<TrendCard />} />
+        </Routes>
+
+        <Footer />
+      </div>
+    </Provider>
   );
 }
 
