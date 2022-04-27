@@ -3,17 +3,17 @@
 # Introduction
 Optic Shop is an e-commerce app for glasses😎. 
 
-## Technologies used
+# Technologies used
 
-# BackEnd
+## BackEnd
   Express
   REST
   Sequelize
   Postgres
   NodeJS
   
-# FrontEnd
-  React
+## FrontEnd
+  ### React
   Redux
   Axios
   Bootstrap
