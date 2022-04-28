@@ -24,4 +24,4 @@ Optic Shop is an e-commerce app for glasses😎.
 
 ## Database Diagram
 
-![alt text](picture/db_diagram.png)
+![alt text](/src/db_diagram.png)
