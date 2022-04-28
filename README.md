@@ -14,7 +14,7 @@ Optic Shop is an e-commerce app for glasses😎.
 - Postgres
 - NodeJS
 
-2.FrontEnd
+  2.FrontEnd
 
 - React
 - Redux
@@ -25,3 +25,9 @@ Optic Shop is an e-commerce app for glasses😎.
 ## Database Diagram
 
 ![alt text](src/db_diagram.png)
+
+## Wireframe
+
+![alt text](src/banner.png)
+![alt text](src/home.png)
+![alt text](src/details.png)
