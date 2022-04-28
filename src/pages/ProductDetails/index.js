@@ -95,6 +95,10 @@ export default function ProductDetails() {
                       </li>
 
                       <li class="list-inline-item p-2">
+                        Form
+                        <div class="text-muted">{details.form}</div>
+                      </li>
+                      <li class="list-inline-item p-2">
                         Frame Material
                         <div class="text-muted">{details.materialFrame}</div>
                       </li>

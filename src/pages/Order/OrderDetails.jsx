@@ -6,19 +6,19 @@ import { selectOrder } from "../../store/user/selectors";
 import "./styles.css";
 export default function OrderDetails() {
   const data = useSelector(selectOrder);
+
   console.log(data);
 
-  if (!data) return <p>No orders found</p>;
+  if (!data)
+    return (
+      <Container className="p-5">
+        <h1>No orders found</h1>
+      </Container>
+    );
   return (
     <Container>
       <h3 className="text-center text-muted mt-4 p-2">My orders</h3>
-      {/* <input
-        type="text"
-        className="form-control p-4 icon"
-        placeholder="Search"
-      /> */}
 
-      {/* {data?.orders?.map((e) => ( */}
       {data?.orders?.map((e) => (
         <div
           className="row mt-5"
