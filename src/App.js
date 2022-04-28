@@ -31,7 +31,7 @@ function App() {
   }, [dispatch]);
 
   const options = {
-    timeout: 5000,
+    timeout: 2000,
     position: positions.BOTTOM_CENTER,
   };
 

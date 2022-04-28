@@ -53,7 +53,7 @@ export default function Cart() {
                                 <img
                                   alt="item"
                                   className="img-fluid mx-auto d-block p-2 image sml-img"
-                                  src={cart.images[2].image_url}
+                                  src={cart.images[0].image_url}
                                 />
                               </Link>
                             </div>
@@ -144,7 +144,6 @@ export default function Cart() {
                                       ) {
                                         dispatch(deleteItem(cart.id));
                                       }
-                                      
                                     }}
                                   >
                                     Delete

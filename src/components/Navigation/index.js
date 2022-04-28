@@ -48,7 +48,7 @@ export default function Navigation() {
           >
             <NavbarItem path="/" linkText="HOME" />
             <NavbarItem path="/trends" linkText="TRENDS" />
-            <NavbarItem path="/aboutus" linkText="ABOUTUS" />
+            <NavbarItem path="/aboutus" linkText="ABOUT US" />
           </Nav>
           {loginLogoutControls}
           <Nav.Link

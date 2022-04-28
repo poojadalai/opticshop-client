@@ -6,16 +6,18 @@ import { Container } from "react-bootstrap";
 import "../Cart/cart.css";
 import { useNavigate } from "react-router-dom";
 import { sumOfProducts } from "../../utils/product";
+import { selectUser } from "../../store/user/selectors";
 export default function Checkout() {
+  const user = useSelector(selectUser);
   const paypal = useRef();
-  const [name, setName] = useState();
-  const [company, setCompany] = useState();
-  const [address, setAddress] = useState();
-  const [city, setCity] = useState();
-  const [zipcode, setZipcode] = useState();
-  const [country, setCountry] = useState();
-  const [state, setState] = useState();
-  const [phone, setPhone] = useState();
+  const [name, setName] = useState(user.name);
+  const [company, setCompany] = useState(user.company);
+  const [address, setAddress] = useState(user.address);
+  const [city, setCity] = useState(user.city);
+  const [zipcode, setZipcode] = useState(user.zipcode);
+  const [country, setCountry] = useState(user.country);
+  const [state, setState] = useState(user.state);
+  const [phone, setPhone] = useState(user.phone);
   // const [check, setCheck] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -26,14 +28,6 @@ export default function Checkout() {
     setTotal(sumOfProducts(cart));
   }, [cart]);
 
-  // const initialOptions = {
-  //   "client-id":
-  //     "https://www.paypal.com/sdk/js?client-id=AYMB0ZeHI-m-XaosmZbeXRBBwxB2iSoZn5bL7L4dBOnC67tVMs8Mwlb2KWpMrgeRGaRemTgmhjCgGIU2",
-  //   currency: "EUR",
-  //   intent: "capture",
-  //   "data-client-token": "abc123xyz==",
-  //   "data-namespace": "paypal_sdk",
-  // };
   function submitForm(event) {
     dispatch(
       orderData(
@@ -72,7 +66,7 @@ export default function Checkout() {
                 description: "Cool looking table",
                 amount: {
                   currency_code: "EUR",
-                  value: 2
+                  value: 2,
                 },
               },
             ],
@@ -245,25 +239,10 @@ export default function Checkout() {
             </div>
           </div>{" "}
         </div>
-        {/* <Link to="/payment" >
-          checkout
-        </Link> */}
         <div class="col-md-5 mb-4">
           <div class="header py-3">
             <h5 class="mt-2 ">Select Payment Method</h5>
           </div>
-          {/* <Button
-            onClick={() => {
-              setCheck();
-            }}
-          >
-            Checkout
-          </Button> */}
-
-          {/* <PayPalScriptProvider >
-            <PayPalButtons ref={paypal} />
-          </PayPalScriptProvider> */}
-
           <div ref={paypal}></div>
         </div>
       </form>
