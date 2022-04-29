@@ -77,7 +77,10 @@ export default function Checkout() {
         },
       })
       .render(paypal.current);
-  }, [id, cart, window.paypal_sdk, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const boo = "bo";
 
   if (!allAddresses)
     return (
