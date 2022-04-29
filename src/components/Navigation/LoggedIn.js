@@ -22,6 +22,7 @@ export default function LoggedIn() {
             LogOut
           </NavDropdown.Item>
           <NavDropdown.Item href="/orders">Orders</NavDropdown.Item>
+          <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
         </NavDropdown>
       </Nav>
 

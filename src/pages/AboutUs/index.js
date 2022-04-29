@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import HeroBanner from "../../components/HeroBanner";
 
 export default function Aboutus() {

@@ -115,34 +115,19 @@ export const getUserWithStoredToken = () => {
 
 export const orderData = (
   cart,
-  name,
-  company,
-  address,
-  city,
-  zipcode,
-  country,
-  state,
-  phone
+  id
 ) => {
   return async (dispatch, getState) => {
     try {
       const { token } = selectUser(getState());
-
-      // console.log(name, content, imageUrl);
       dispatch(appLoading());
 
+      console.log("cart", cart, "id", id);
       const response = await axios.post(
         `${apiUrl}/orders`,
         {
           cart,
-          name,
-          company,
-          address,
-          city,
-          zipcode,
-          country,
-          state,
-          phone,
+          id,
         },
         {
           headers: {
@@ -151,7 +136,6 @@ export const orderData = (
         }
       );
 
-      console.log("from order!", response);
       dispatch(
         showMessageWithTimeout("success", false, response.data.message, 3000)
       );

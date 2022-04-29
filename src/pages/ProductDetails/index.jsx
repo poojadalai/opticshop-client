@@ -85,27 +85,29 @@ export default function ProductDetails() {
                 >
                   <Tab eventKey="details" title="Details">
                     <div className="mt-4">
-                      <h6 class="text-muted">{details.brand.desc}</h6>
+                      <h6 className="text-muted">{details.brand.desc}</h6>
                     </div>
                   </Tab>
                   <Tab eventKey="specification" title="Specification">
-                    <ul class="list-inline">
-                      <li class="list-inline-item p-2 text-capitalize">
-                        Gender<div class="text-muted">{details.gender}</div>
+                    <ul className="list-inline">
+                      <li className="list-inline-item p-2 text-capitalize">
+                        Gender<div className="text-muted">{details.gender}</div>
                       </li>
 
-                      <li class="list-inline-item p-2">
+                      <li className="list-inline-item p-2">
                         Form
-                        <div class="text-muted">{details.form}</div>
+                        <div className="text-muted">{details.form}</div>
                       </li>
-                      <li class="list-inline-item p-2">
+                      <li className="list-inline-item p-2">
                         Frame Material
-                        <div class="text-muted">{details.materialFrame}</div>
+                        <div className="text-muted">
+                          {details.materialFrame}
+                        </div>
                       </li>
 
-                      <li class="list-inline-item p-2">
+                      <li className="list-inline-item p-2">
                         Lens Material
-                        <div class="text-muted">{details.materialLens}</div>
+                        <div className="text-muted">{details.materialLens}</div>
                       </li>
                     </ul>
                   </Tab>
@@ -130,7 +132,7 @@ export default function ProductDetails() {
                 <div>
                   {" "}
                   <h5 className="font-weight-bold">Lens Color</h5>
-                  <ul class="list-inline d-flex">
+                  <ul className="list-inline d-flex">
                     <span
                       className="dot list-inline-item"
                       style={{ backgroundColor: `${details.lensColor}` }}
@@ -145,7 +147,7 @@ export default function ProductDetails() {
               )}
 
               <h5 className="font-weight-bold">Frame Color</h5>
-              <ul class="list-inline d-flex">
+              <ul className="list-inline d-flex">
                 <span
                   className="dot list-inline-item"
                   style={{ backgroundColor: `${details.frameColor}` }}
@@ -172,7 +174,7 @@ export default function ProductDetails() {
               variant="secondry"
               className="p-2 text-light bg-secondary"
             >
-              In the shopping cart
+              Add to cart
             </Button>
           </Col>
         </Row>

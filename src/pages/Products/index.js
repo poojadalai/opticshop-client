@@ -15,7 +15,7 @@ import { FaGreaterThan, FaLessThan } from "react-icons/fa";
 export default function Products() {
   const dispatch = useDispatch();
   const products = useSelector(selectProducts);
-  console.log(products);
+  // console.log(products);
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);

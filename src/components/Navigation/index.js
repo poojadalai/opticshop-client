@@ -58,7 +58,7 @@ export default function Navigation() {
           >
             <div>
               {/* <span className="cartNum"></span> */}
-              <i class="fa badge fa-lg" value={cart.length}>
+              <i className="fa badge fa-lg" value={cart.length}>
                 <BsCartFill />
               </i>
             </div>

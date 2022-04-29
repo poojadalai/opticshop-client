@@ -7,7 +7,7 @@ import "./styles.css";
 export default function OrderDetails() {
   const data = useSelector(selectOrder);
 
-  console.log(data);
+  // const sortedOrders = data.sort((a, b) => b.createdAt - a.createdAt);
 
   if (!data)
     return (
@@ -15,6 +15,7 @@ export default function OrderDetails() {
         <h1>No orders found</h1>
       </Container>
     );
+
   return (
     <Container>
       <h3 className="text-center text-muted mt-4 p-2">My orders</h3>
@@ -28,19 +29,19 @@ export default function OrderDetails() {
             Order Number 00{e.id}2583 | {moment(e.createdAt).format("LL")}
           </small>
           {e.products.map((item) => (
-            <div class="card mb-3">
-              <div class="row no-gutters">
-                <div class="col-md-4">
+            <div calssName="card mb-3">
+              <div calssName="row no-gutters">
+                <div calssName="col-md-4">
                   <img
                     src={item.images[0].image_url}
-                    class="card-img"
+                    calssName="card-img"
                     alt="..."
                   />
                 </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title">Eyewear {item.name}</h5>
-                    <p class="card-text">
+                <div calssName="col-md-8">
+                  <div calssName="card-body">
+                    <h5 calssName="card-title">Eyewear {item.name}</h5>
+                    <p calssName="card-text">
                       This is a wider card with supporting text below as a
                       natural lead-in to additional content. This content is a
                       little bit longer.
@@ -48,8 +49,8 @@ export default function OrderDetails() {
                     <div className="text-muted mb-2">
                       Quantity: {item.orderProduct.quantity}
                     </div>
-                    <p class="card-text">
-                      <small class="text-success">{e.status}</small>
+                    <p calssName="card-text">
+                      <small calssName="text-success">{e.status}</small>
                     </p>
                   </div>
                 </div>

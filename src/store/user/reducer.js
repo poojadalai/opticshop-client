@@ -10,6 +10,7 @@ const initialState = {
   name: null,
   email: null,
   order: [],
+  address: [],
 };
 
 const reducer = (state = initialState, action) => {
