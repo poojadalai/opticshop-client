@@ -7,10 +7,20 @@ import "../Cart/cart.css";
 import { useNavigate } from "react-router-dom";
 import { sumOfProducts } from "../../utils/product";
 import { selectAdress } from "../../store/user/selectors";
+//
+
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+//
 
 export default function Checkout() {
   const [editMode, setEditMode] = useState(false);
   const paypal = useRef();
+  //
+  const [show, setShow] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [ErrorMessage, setErrorMessage] = useState("");
+  const [orderID, setOrderID] = useState(false);
+  //
 
   // const [name, setName] = useState();
   const [company, setCompany] = useState();
@@ -34,9 +44,9 @@ export default function Checkout() {
 
   function submitForm() {
     dispatch(orderData(cart, id));
-    // setTimeout(() => {
-    //   navigate("/");
-    // }, 3000);
+    setTimeout(() => {
+      navigate("/");
+    }, 3000);
   }
 
   useEffect(() => {
@@ -44,43 +54,10 @@ export default function Checkout() {
   }, [allAddresses]);
 
   useEffect(() => {
-    window.paypal_sdk
-      .Buttons({
-        createOrder: (data, actions, err) => {
-          return actions.order.create({
-            intent: "CAPTURE",
-            purchase_units: [
-              {
-                description: "Cool looking table",
-                amount: {
-                  currency_code: "EUR",
-                  value: 2,
-                },
-              },
-            ],
-          });
-        },
-        onApprove: async (data, actions) => {
-          // const order = await actions.order.capture();
-          // submitForm();
-          // dispatch(orderData(cart, id));
-          if (id) {
-            console.log("dispatch: ", cart, id);
-            dispatch(orderData(cart, id));
-          }
-          // alert(
-          //   "You have successfully created subscription " + data.subscriptionID
-          // );
-        },
-        onError: (err) => {
-          console.log("Paypal error", err);
-        },
-      })
-      .render(paypal.current);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const boo = "bo";
+    if (success) {
+      console.log("Payment successful!!");
+    }
+  }, [success]);
 
   if (!allAddresses)
     return (
@@ -89,64 +66,106 @@ export default function Checkout() {
       </Container>
     );
 
-  // onSubmit={}
+  const createOrder = (data, actions) => {
+    return actions.order
+      .create({
+        purchase_units: [
+          {
+            description: "Sunflower",
+            amount: {
+              currency_code: "EUR",
+              value: 1,
+            },
+          },
+        ],
+        // not needed if a shipping address is actually needed
+        application_context: {
+          shipping_preference: "NO_SHIPPING",
+        },
+      })
+      .then((orderID) => {
+        setOrderID(orderID);
+        return orderID;
+      });
+  };
+
+  // check Approval
+  const onApprove = (data, actions) => {
+    return actions.order.capture().then(function (details) {
+      const { payer } = details;
+      setSuccess(true);
+      submitForm();
+    });
+  };
+  //capture likely error
+  const onError = (data, actions) => {
+    setErrorMessage("An Error occured with your payment ");
+  };
+  //
+
   return (
-    <Container className="p-3">
-      <div className="row">
-        {allAddresses.addresses?.map((address) => {
-          return (
-            <div className="col-sm-6" key={address.id}>
-              <div
-                style={{
-                  border:
-                    address.id === id ? "1px solid green" : "1px solid black",
-                  height: "150px",
-                  padding: "10px",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <div className="card-body">
-                  <h5 className="card-title">{address.address}</h5>
-                  <p className="card-text">{address.zipcode}</p>
+    <PayPalScriptProvider
+      options={{
+        "client-id":
+          "AYMB0ZeHI-m-XaosmZbeXRBBwxB2iSoZn5bL7L4dBOnC67tVMs8Mwlb2KWpMrgeRGaRemTgmhjCgGIU2&currency=EUR",
+      }}
+    >
+      <Container className="p-3">
+        <div className="row">
+          {allAddresses.addresses?.map((address) => {
+            return (
+              <div className="col-sm-6" key={address.id}>
+                <div
+                  style={{
+                    border:
+                      address.id === id ? "1px solid green" : "1px solid black",
+                    height: "150px",
+                    padding: "10px",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <div className="card-body">
+                    <h5 className="card-title">{address.address}</h5>
+                    <p className="card-text">{address.zipcode}</p>
+                  </div>
+                  {address.id !== id ? (
+                    <button
+                      onClick={() => setId(address.id)}
+                      style={{
+                        background: "none",
+                        color: "green",
+                        borderColor: "green",
+                      }}
+                    >
+                      select
+                    </button>
+                  ) : (
+                    <div style={{ color: "green" }}>Address selected</div>
+                  )}
                 </div>
-                {address.id !== id ? (
-                  <button
-                    onClick={() => setId(address.id)}
-                    style={{
-                      background: "none",
-                      color: "green",
-                      borderColor: "green",
-                    }}
-                  >
-                    select
-                  </button>
-                ) : (
-                  <div style={{ color: "green" }}>Address selected</div>
-                )}
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
 
-      <Button
-        className="col-sm-6"
-        style={{ marginTop: "20px" }}
-        onClick={() => setEditMode(!editMode)}
-      >
-        {editMode ? "Close" : "Add Address"}
-      </Button>
+        <Button
+          className="col-sm-6"
+          style={{ marginTop: "20px" }}
+          onClick={() => setEditMode(!editMode)}
+        >
+          {editMode ? "Close" : "Add Address"}
+        </Button>
 
-      <div className="d-md-flex">
-        {editMode && (
-          <div className="col-md-6">
-            <div className="row mb-4">
-              <div className="col ">
-                <div className="header py-3">
-                  <h5 className="mt-2">Shipping Details</h5>
-                </div>
-                {/* <div className="form-outline mb-3">
+        <div className="d-md-flex">
+          {editMode && (
+            <div className="col-md-6">
+              <div className="row mb-4">
+                <div className="col ">
+                  <div className="header py-3">
+                    <h5 className="mt-2">Shipping Details</h5>
+                  </div>
+                  {/* <div className="form-outline mb-3">
                   <input
                     name="fullname"
                     type="text"
@@ -157,116 +176,125 @@ export default function Checkout() {
                     required
                   />
                 </div> */}
-                <div className="form-outline mb-3">
-                  <input
-                    name="company"
-                    type="text"
-                    value={company}
-                    className="form-control"
-                    placeholder="Company"
-                    onChange={(event) => setCompany(event.target.value)}
-                    required
-                  />
-                </div>
-                <div className="form-outline mb-3">
-                  <input
-                    name="address"
-                    value={address}
-                    type="text"
-                    className="form-control"
-                    placeholder="Address"
-                    onChange={(event) => setAddress(event.target.value)}
-                    required
-                  />
-                </div>
-                <div className="row mb-4">
-                  <div className="col">
-                    <div className="form-outline">
-                      <input
-                        name="city"
-                        value={city}
-                        type="text"
-                        className="form-control"
-                        placeholder="City"
-                        onChange={(event) => setCity(event.target.value)}
-                        required
-                      />
+                  <div className="form-outline mb-3">
+                    <input
+                      name="company"
+                      type="text"
+                      value={company}
+                      className="form-control"
+                      placeholder="Company"
+                      onChange={(event) => setCompany(event.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="form-outline mb-3">
+                    <input
+                      name="address"
+                      value={address}
+                      type="text"
+                      className="form-control"
+                      placeholder="Address"
+                      onChange={(event) => setAddress(event.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="row mb-4">
+                    <div className="col">
+                      <div className="form-outline">
+                        <input
+                          name="city"
+                          value={city}
+                          type="text"
+                          className="form-control"
+                          placeholder="City"
+                          onChange={(event) => setCity(event.target.value)}
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div className="col">
+                      <div className="form-outline">
+                        <input
+                          name="zipcode"
+                          type="text"
+                          value={zipcode}
+                          className="form-control"
+                          placeholder="Postcode"
+                          onChange={(event) => setZipcode(event.target.value)}
+                          required
+                        />
+                      </div>
                     </div>
                   </div>
-                  <div className="col">
-                    <div className="form-outline">
-                      <input
-                        name="zipcode"
-                        type="text"
-                        value={zipcode}
-                        className="form-control"
-                        placeholder="Postcode"
-                        onChange={(event) => setZipcode(event.target.value)}
-                        required
-                      />
+                  <div className="row mb-4">
+                    <div className="col">
+                      <div className="form-outline">
+                        <input
+                          name="country"
+                          type="text"
+                          value={country}
+                          className="form-control"
+                          placeholder="Country"
+                          onChange={(event) => setCountry(event.target.value)}
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div className="col">
+                      <div className="form-outline">
+                        <input
+                          value={state}
+                          name="state"
+                          type="text"
+                          className="form-control"
+                          placeholder="State"
+                          onChange={(event) => setState(event.target.value)}
+                        />
+                      </div>
                     </div>
                   </div>
+                  <div className="row mb-4">
+                    <div className="col">
+                      <div className="form-outline">
+                        <input
+                          value={phone}
+                          name="phone"
+                          type="text"
+                          className="form-control"
+                          placeholder="Phone"
+                          onChange={(event) => setPhone(event.target.value)}
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <Button
+                    onClick={() => {
+                      submitForm();
+                    }}
+                  >
+                    Submit
+                  </Button>
                 </div>
-                <div className="row mb-4">
-                  <div className="col">
-                    <div className="form-outline">
-                      <input
-                        name="country"
-                        type="text"
-                        value={country}
-                        className="form-control"
-                        placeholder="Country"
-                        onChange={(event) => setCountry(event.target.value)}
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div className="col">
-                    <div className="form-outline">
-                      <input
-                        value={state}
-                        name="state"
-                        type="text"
-                        className="form-control"
-                        placeholder="State"
-                        onChange={(event) => setState(event.target.value)}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="row mb-4">
-                  <div className="col">
-                    <div className="form-outline">
-                      <input
-                        value={phone}
-                        name="phone"
-                        type="text"
-                        className="form-control"
-                        placeholder="Phone"
-                        onChange={(event) => setPhone(event.target.value)}
-                        required
-                      />
-                    </div>
-                  </div>
-                </div>
-                <Button
-                  onClick={() => {
-                    submitForm();
-                  }}
-                >
-                  Submit
-                </Button>
               </div>
             </div>
+          )}
+          <div className="col-md-5 mb-4">
+            <div className="header py-3">
+              <Button onClick={() => setShow(true)} className="mt-2 ">
+                Select Payment Method
+              </Button>
+            </div>
+            {show ? (
+              <PayPalButtons
+                style={{ layout: "vertical" }}
+                createOrder={createOrder}
+                onApprove={onApprove}
+              />
+            ) : null}
+            {/* <div ref={paypal}></div> */}
           </div>
-        )}
-        <div className="col-md-5 mb-4">
-          <div className="header py-3">
-            <h5 className="mt-2 ">Select Payment Method</h5>
-          </div>
-          <div ref={paypal}></div>
-        </div>
-        {/* <div calssName="col-md-5 m-2 mt-4">
+          {/* <div calssName="col-md-5 m-2 mt-4">
           <div calssName="card  ">
             <div calssName="p-3 bg-light bg-opacity-10">
               <h6 calssName="card-title mb-3">Order Summary</h6>
@@ -304,14 +332,15 @@ export default function Checkout() {
             </div>
           </div>
         </div> */}
-      </div>
-      <Button
-        onClick={() => {
-          submitForm();
-        }}
-      >
-        Submit
-      </Button>
-    </Container>
+        </div>
+        <Button
+          onClick={() => {
+            submitForm();
+          }}
+        >
+          Submit
+        </Button>
+      </Container>
+    </PayPalScriptProvider>
   );
 }
