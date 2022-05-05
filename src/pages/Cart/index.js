@@ -7,13 +7,12 @@ import {
 } from "../../store/product/actions";
 import { selectCart } from "../../store/product/selectors";
 import "./cart.css";
-import { confirmAlert } from "react-confirm-alert";
+
 import { Container } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { sumOfProducts } from "../../utils/product";
 import { Link } from "react-router-dom";
 import { selectToken } from "../../store/user/selectors";
-import { useAlert } from "react-alert";
 
 export default function Cart() {
   const carts = useSelector(selectCart);
@@ -24,8 +23,6 @@ export default function Cart() {
   }, [carts]);
   const token = useSelector(selectToken);
   useEffect(() => {}, [carts]);
-
-  const alert = useAlert();
 
   return carts.length === 0 ? (
     <Container className="p-5">

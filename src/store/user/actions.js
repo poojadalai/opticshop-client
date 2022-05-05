@@ -13,7 +13,8 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const TOKEN_STILL_VALID = "TOKEN_STILL_VALID";
 export const LOG_OUT = "LOG_OUT";
 export const ORDER_DATA = "ORDER_DATA";
-
+export const POST_ADDRESS = "POST_ADDRESS";
+export const DELETE_SUCCESS = "DELETE_SUCCESS";
 const loginSuccess = (userWithToken) => {
   return {
     type: LOGIN_SUCCESS,
@@ -31,6 +32,17 @@ const order = (order) => ({
   payload: order,
 });
 
+const postAddress = (address) => ({
+  type: POST_ADDRESS,
+  payload: address,
+});
+
+const deleteAdd = (id) => {
+  return {
+    type: DELETE_SUCCESS,
+    payload: id,
+  };
+};
 export const logOut = () => ({ type: LOG_OUT });
 
 export const signUp = (name, email, password) => {
@@ -113,10 +125,7 @@ export const getUserWithStoredToken = () => {
   };
 };
 
-export const orderData = (
-  cart,
-  id
-) => {
+export const orderData = (cart, id) => {
   return async (dispatch, getState) => {
     try {
       const { token } = selectUser(getState());
@@ -136,13 +145,83 @@ export const orderData = (
         }
       );
 
+      dispatch(order(response.data));
       dispatch(
         showMessageWithTimeout("success", false, response.data.message, 3000)
       );
-      dispatch(order(response.data));
       dispatch(appDoneLoading());
     } catch (e) {
       console.log(e.message);
+      dispatch(appDoneLoading());
+    }
+  };
+};
+
+export const postAddresses = (
+  company,
+  address,
+  city,
+  zipcode,
+  country,
+  state,
+  phone
+) => {
+  return async (dispatch, getState) => {
+    const { token } = selectUser(getState());
+    dispatch(appLoading());
+    try {
+      const response = await axios.post(
+        `${apiUrl}/auth/profile`,
+        {
+          company,
+          address,
+          city,
+          zipcode,
+          country,
+          state,
+          phone,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      dispatch(postAddress(response.data));
+      dispatch(
+        showMessageWithTimeout("success", false, response.data.message, 3000)
+      );
+      dispatch(appDoneLoading());
+    } catch (e) {
+      console.log(e.message);
+      dispatch(appDoneLoading());
+    }
+  };
+};
+
+export const deleteAddress = (addressId) => {
+  return async (dispatch, getState) => {
+    dispatch(appLoading());
+    const { token } = selectUser(getState());
+    try {
+      const response = await axios.delete(
+        `${apiUrl}/auth/profile/${addressId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      dispatch(deleteAdd(addressId));
+      dispatch(
+        showMessageWithTimeout("success", false, response.data.message, 3000)
+      );
+      console.log("Address deleted?", response.data);
+      dispatch(appDoneLoading());
+    } catch (e) {
+      console.error(e);
     }
   };
 };

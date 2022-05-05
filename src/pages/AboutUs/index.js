@@ -18,14 +18,14 @@ export default function Aboutus() {
           <p className="p-3">
             For us, the customer is central. We are happy to take the time for
             your wishes and questions. You will certainly encounter
-            craftsmanship, quality and passion for glasses at Koopman Optics. In
+            craftsmanship, quality and passion for glasses at The Optic Shop. In
             addition, we never stand still, we keep looking for that one
             beautiful personal pair of glasses, made for you with passion and
             love. This way we ensure that we always have the glasses that suit
             you best. Our varied sunglasses with different brands come from all
             over the world. Have you taken a look at our webshop? Can't quite
             find what you're looking for? Click here to contact us. You are also
-            always very welcome in our store. Koopman optics is located at
+            always very welcome in our store. The Optic Shop is located at
             Kaasmarkt 1 in Purmerend!
           </p>
         </div>

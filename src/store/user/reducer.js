@@ -2,7 +2,8 @@ import {
   LOG_OUT,
   LOGIN_SUCCESS,
   TOKEN_STILL_VALID,
-  ORDER_DATA,
+  POST_ADDRESS,
+  DELETE_SUCCESS,
 } from "./actions";
 
 const initialState = {
@@ -26,12 +27,20 @@ const reducer = (state = initialState, action) => {
     case TOKEN_STILL_VALID:
       return { ...state, ...action.payload };
 
-    // case ORDER_DATA:
-    //   return {
-    //     ...state,
-    //     order: [...state, ...action.payload],
-    //   };
-
+    case POST_ADDRESS:
+      return {
+        ...state,
+        address: [...state.address, action.payload],
+      };
+    case DELETE_SUCCESS:
+      const addressId = action.payload;
+      const newAdd = state.address.filter(
+        (address) => address.id !== addressId
+      );
+      return {
+        ...state,
+        address: newAdd,
+      };
     default:
       return state;
   }

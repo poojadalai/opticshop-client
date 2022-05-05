@@ -92,7 +92,7 @@ export default function Products() {
           <Row>
             <Col className="filter" sm={3}>
               <FrameFilterGender
-                title="FilterBy Gender"
+                title="Gender"
                 isCheckedBlack={gender.man}
                 isCheckedWoman={gender.woman}
                 isCheckedUniSex={gender.unisex}
@@ -101,7 +101,7 @@ export default function Products() {
 
               <br></br>
               <FrameFilterColor
-                title="FilterBy FrameColor"
+                title="FrameColor"
                 isCheckedBlack={frameColor.black}
                 isCheckedHavana={frameColor.havana}
                 isCheckedGold={frameColor.gold}

@@ -21,6 +21,7 @@ import PaypalButton from "./components/PaypalButton";
 import TrendCard from "./components/TrendCard";
 import AlertTemplate from "react-alert-template-basic";
 import AboutUs from "./pages/AboutUs";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +53,7 @@ function App() {
           <Route path="/orders" element={<OrderHistory />} />
           <Route path="/payment" element={<PaypalButton />} />
           <Route path="/trends" element={<TrendCard />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
 
         <Footer />

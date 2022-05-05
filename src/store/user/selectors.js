@@ -5,3 +5,5 @@ export const selectUser = (state) => state.user;
 export const selectOrder = (state) => state.user.user;
 
 export const selectAdress = (state) => state.user.user;
+
+export const selectAdresses = (state) => state.user?.user?.addresses;

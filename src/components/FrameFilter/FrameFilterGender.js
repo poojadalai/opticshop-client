@@ -13,7 +13,7 @@ export default function FrameFilter(props) {
         name="gender"
         checked={isCheckedMan}
         onChange={fun}
-        label="Man"
+        label="Men"
         id="g1"
       />
 
@@ -23,7 +23,7 @@ export default function FrameFilter(props) {
         name="gender"
         checked={isCheckedWoman}
         onChange={fun}
-        label="Woman"
+        label="Women"
         id="g2"
       />
 

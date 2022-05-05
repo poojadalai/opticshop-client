@@ -3,12 +3,11 @@ import {
   APP_DONE_LOADING,
   SET_MESSAGE,
   CLEAR_MESSAGE,
-
 } from "./actions";
 
 const initialState = {
   loading: false,
-  message: null
+  message: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -24,11 +23,9 @@ const reducer = (state = initialState, action) => {
 
     case CLEAR_MESSAGE:
       return { ...state, message: null };
-      case CLEAR_MESSAGE:
-        return { ...state, message: null };
 
     default:
       return state;
   }
 };
-export default reducer
+export default reducer;
