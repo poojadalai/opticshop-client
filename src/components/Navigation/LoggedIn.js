@@ -21,8 +21,8 @@ export default function LoggedIn() {
           <NavDropdown.Item href="/" onClick={() => dispatch(logOut())}>
             LogOut
           </NavDropdown.Item>
-          <NavDropdown.Item href="/orders">Orders</NavDropdown.Item>
           <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+          <NavDropdown.Item href="/orders">Orders</NavDropdown.Item>
         </NavDropdown>
       </Nav>
 
