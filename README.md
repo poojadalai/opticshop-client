@@ -32,4 +32,4 @@ Optic Shop is an e-commerce app for glasses😎.
 ![alt text](src/cart.png)
 ![alt text](src/order.png)
 
-## Backend Link : click <a href="https://github.com/poojadalai/opticshop-server">here</a>
+### Backend Link : click <a href="https://github.com/poojadalai/opticshop-server">here</a>
