@@ -1,23 +1,23 @@
 import React, { useEffect } from "react";
-import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import AddressForm from "../../components/AddressForm";
 import { deleteAddress } from "../../store/user/actions";
 import { selectAdresses, selectUser } from "../../store/user/selectors";
 import "./styles.css";
+import { getUserWithStoredToken } from "../../store/user/actions";
 
 export default function ProfilePage() {
   const allAddress = useSelector(selectAdresses);
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
   const avatar = [
+    "https://bootdey.com/img/Content/avatar/avatar7.png",
     "https://bootdey.com/img/Content/avatar/avatar1.png",
     "https://bootdey.com/img/Content/avatar/avatar2.png",
-    "https://bootdey.com/img/Content/avatar/avatar3.png",
+    // "https://bootdey.com/img/Content/avatar/avatar3.png",
     "https://bootdey.com/img/Content/avatar/avatar4.png",
     "https://bootdey.com/img/Content/avatar/avatar5.png",
     "https://bootdey.com/img/Content/avatar/avatar6.png",
-    "https://bootdey.com/img/Content/avatar/avatar7.png",
   ];
 
   useEffect(() => {}, [allAddress]);
@@ -26,7 +26,7 @@ export default function ProfilePage() {
   const random = Math.floor(Math.random() * avatar.length);
 
   return (
-    <div className="container p-5">
+    <div className="container p-5" style={{ marginBottom: "222px" }}>
       <div className="main-body">
         <nav aria-label="breadcrumb" className="main-breadcrumb">
           <ol className="breadcrumb">
@@ -48,7 +48,8 @@ export default function ProfilePage() {
               <div className="card-body">
                 <div className="d-flex flex-column align-items-center text-center">
                   <img
-                    src={avatar[random]}
+                    // src={avatar[random]}
+                    src="https://www.bootdey.com/img/Content/avatar/avatar3.png"
                     alt="Admin"
                     className="rounded-circle"
                     width="150"
@@ -56,7 +57,7 @@ export default function ProfilePage() {
                   <div className="mt-3">
                     <h4 className="text-uppercase">{user.name}</h4>
                     <p className="text-muted font-size-sm">
-                      {allAddress[0]?.address}
+                      {allAddress[0]?.city}
                     </p>
                     <button className="mb-2 btn btn-primary">My Profile</button>
                   </div>
@@ -126,6 +127,7 @@ export default function ProfilePage() {
                         className="btn btn-primary"
                         style={{ marginLeft: "25px" }}
                         onClick={() => {
+                          dispatch(getUserWithStoredToken());
                           dispatch(deleteAddress(userAdd.id));
                         }}
                       >

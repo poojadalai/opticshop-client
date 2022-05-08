@@ -15,11 +15,12 @@ export default function OrderDetails() {
     );
 
   return (
-    <Container>
+    <Container style={{marginBottom: "222px"}}>
       <h3 className="text-center text-muted mt-4 p-2">My orders</h3>
 
       {data?.orders?.map((e) => (
         <div
+          key={e.id}
           className="row mt-5 "
           style={{ maxWidth: "800px", margin: "0 auto" }}
         >

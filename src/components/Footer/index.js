@@ -22,28 +22,25 @@ const Footer = () => (
           <h5 className="text-uppercase">Social Media</h5>
           <ul className="list-unstyled">
             <li>
-              <a href="#!">
-                <FiFacebook /> 
-                merchant's view
+              <a href="https://www.facebook.com/">
+                <FiFacebook />
+                Facebook
               </a>
             </li>
             <li>
-              <a href="#!">
+              <a href="https://instagram.com/">
                 {" "}
-                <FiInstagram />  {" "}
-                merchant's view
+                <FiInstagram /> Instagram
               </a>
             </li>
             <li>
-              <a href="#!">
-                <FiTwitter /> {" "}
-                merchant's view
+              <a href="https://twitter.com/">
+                <FiTwitter /> Twitter
               </a>
             </li>
             <li>
-              <a href="#!">
-                <FiYoutube /> {" "}
-                merchant's view
+              <a href="https://www.youtube.com/">
+                <FiYoutube /> Youtube
               </a>
             </li>
           </ul>

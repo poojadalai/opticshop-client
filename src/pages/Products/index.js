@@ -83,12 +83,12 @@ export default function Products() {
   }
 
   return (
-    <div>
+    <div style={{ position: "relative" }}>
       <HeroBanner url="//cdn.shopify.com/s/files/1/0266/9379/6048/files/4612da0adc113d6cc7a5bb9fc42b9643_1_1920x.progressive.jpg?v=1615289490" />
 
       <About />
       <div className="content">
-        <Container>
+        <Container style={{ marginBottom: "222px" }}>
           <Row>
             <Col className="filter" sm={3}>
               <FrameFilterGender
@@ -101,7 +101,7 @@ export default function Products() {
 
               <br></br>
               <FrameFilterColor
-                title="FrameColor"
+                title="Frame Color"
                 isCheckedBlack={frameColor.black}
                 isCheckedHavana={frameColor.havana}
                 isCheckedGold={frameColor.gold}

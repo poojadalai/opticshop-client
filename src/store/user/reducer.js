@@ -32,15 +32,16 @@ const reducer = (state = initialState, action) => {
         ...state,
         address: [...state.address, action.payload],
       };
+
     case DELETE_SUCCESS:
-      const addressId = action.payload;
-      const newAdd = state.address.filter(
-        (address) => address.id !== addressId
-      );
+      const id = action.payload;
+      const newAdd = state.address.filter((address) => address.id !== id);
+
       return {
         ...state,
         address: newAdd,
       };
+
     default:
       return state;
   }

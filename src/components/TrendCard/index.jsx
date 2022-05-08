@@ -4,7 +4,7 @@ import "./style.css";
 
 export default function TrendCard() {
   return (
-    <Container className="p-5">
+    <Container className="p-5" style={{ marginBottom: "222px" }}>
       <h1 className="text-muted"> New Trends</h1>
       <div className="row">
         <div className="col-lg-4 col-md-12 mb-2 mb-lg-0">

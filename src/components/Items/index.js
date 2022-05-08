@@ -11,7 +11,10 @@ export default function Items(props) {
   const alert = useAlert();
 
   return (
-    <Card className="product-card" style={{ width: "18rem" }}>
+    <Card
+      className="product-card"
+      style={{ width: "18rem"}}
+    >
       <Card.Img style={{ margin: "1px" }} variant="top" src={props.url} />
       <Card.Body style={{ textAlign: "center", padding: "10px" }}>
         <Card.Title className="text-capitalize">

@@ -4,10 +4,10 @@ import HeroBanner from "../../components/HeroBanner";
 
 export default function Aboutus() {
   return (
-    <div>
+    <div >
       <HeroBanner url="https://cdn.shopify.com/s/files/1/0266/9379/6048/files/d261945023c11200421ce5c3a5082aff_1_1920x.progressive.jpg?v=1615298262" />
 
-      <Container className="p-5">
+      <Container className="p-5" style={{marginBottom: "222px"}}>
         <div
           className="w-80 p-4 m-auto"
           // style={{ position: "absolute", backgroundColor: "blue", top: "35%" }}
@@ -24,9 +24,8 @@ export default function Aboutus() {
             love. This way we ensure that we always have the glasses that suit
             you best. Our varied sunglasses with different brands come from all
             over the world. Have you taken a look at our webshop? Can't quite
-            find what you're looking for? Click here to contact us. You are also
-            always very welcome in our store. The Optic Shop is located at
-            Kaasmarkt 1 in Purmerend!
+            find what you're looking for? You are also always very welcome in
+            our store. The Optic Shop is located at Cyclamenstraat, Aalsmeer.
           </p>
         </div>
       </Container>

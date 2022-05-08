@@ -29,7 +29,7 @@ export default function Cart() {
       <h1>Your cart is empty</h1>
     </Container>
   ) : (
-    <main className="container page">
+    <main className="container page" style={{ marginBottom: "222px" }}>
       <section className="shopping-cart dark">
         <div className="container">
           <div className="block-heading">

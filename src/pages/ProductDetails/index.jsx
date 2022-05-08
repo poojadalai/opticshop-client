@@ -31,7 +31,21 @@ export default function ProductDetails() {
     );
   return (
     <div>
-      <Container className="details-container">
+      <Container
+        className="details-container"
+        style={{ marginBottom: "222px" }}
+      >
+        <nav aria-label="breadcrumb" className="main-breadcrumb p-4">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
+              <a href="/">Home</a>
+            </li>
+            <li className="breadcrumb-item">{details.brand.name}</li>
+            <li className="breadcrumb-item active" aria-current="page">
+              {details.name}
+            </li>
+          </ol>
+        </nav>
         <Row className="col-lg-8 m-md-4 w-100">
           <Col sm={6}>
             <Col>
@@ -85,29 +99,32 @@ export default function ProductDetails() {
                 >
                   <Tab eventKey="details" title="Details">
                     <div className="mt-4">
-                      <h6 className="text-muted">{details.brand.desc}</h6>
+                      <h5 className="text-muted">{details.brand.desc}</h5>
                     </div>
                   </Tab>
                   <Tab eventKey="specification" title="Specification">
                     <ul className="list-inline">
                       <li className="list-inline-item p-2 text-capitalize">
-                        Gender<div className="text-muted">{details.gender}</div>
+                        <h4>Gender</h4>
+                        <div className="h5 text-muted">{details.gender}</div>
                       </li>
 
                       <li className="list-inline-item p-2">
-                        Form
-                        <div className="text-muted">{details.form}</div>
+                        <h4>Form</h4>
+                        <div className="h5 text-muted">{details.form}</div>
                       </li>
                       <li className="list-inline-item p-2">
-                        Frame Material
-                        <div className="text-muted">
+                        <h4>Frame Material</h4>
+                        <div className="h5 text-muted">
                           {details.materialFrame}
                         </div>
                       </li>
 
                       <li className="list-inline-item p-2">
-                        Lens Material
-                        <div className="text-muted">{details.materialLens}</div>
+                        <h4>Lens Material</h4>
+                        <div className="h5 text-muted">
+                          {details.materialLens}
+                        </div>
                       </li>
                     </ul>
                   </Tab>

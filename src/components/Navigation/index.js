@@ -58,9 +58,16 @@ export default function Navigation() {
           >
             <div>
               {/* <span className="cartNum"></span> */}
-              <i className="fa badge fa-lg" value={cart.length}>
-                <BsCartFill />
-              </i>
+
+              <div>
+                {cart.length > 0 ? (
+                  <i className="fa badge fa-lg" value={cart.length}>
+                    <BsCartFill />
+                  </i>
+                ) : (
+                  <BsCartFill />
+                )}
+              </div>
             </div>
           </Nav.Link>
         </Navbar.Collapse>

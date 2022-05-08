@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { postAddresses } from "../../store/user/actions";
-
+import { getUserWithStoredToken } from "../../store/user/actions";
 export default function AddressForm() {
   const dispatch = useDispatch();
   const [editMode, setEditMode] = useState(false);
@@ -23,17 +23,7 @@ export default function AddressForm() {
               <div className="header py-3">
                 <h5 className="mt-2">Shipping Details</h5>
               </div>
-              <div className="form-outline mb-3">
-                <input
-                  name="company"
-                  type="text"
-                  value={company}
-                  className="form-control"
-                  placeholder="Company"
-                  onChange={(event) => setCompany(event.target.value)}
-                  required
-                />
-              </div>
+
               <div className="form-outline mb-3">
                 <input
                   name="address"
@@ -115,8 +105,20 @@ export default function AddressForm() {
                   </div>
                 </div>
               </div>
+              <div className="form-outline mb-3">
+                <input
+                  name="company"
+                  type="text"
+                  value={company}
+                  className="form-control"
+                  placeholder="Company"
+                  onChange={(event) => setCompany(event.target.value)}
+                  required
+                />
+              </div>
               <Button
                 onClick={() => {
+                  dispatch(getUserWithStoredToken());
                   dispatch(
                     postAddresses(
                       company,
@@ -128,7 +130,14 @@ export default function AddressForm() {
                       phone
                     )
                   );
-                  console.log("component");
+
+                  setCompany("");
+                  setAddress("");
+                  setCity("");
+                  setZipcode("");
+                  setCountry("");
+                  setState("");
+                  setPhone("");
                 }}
               >
                 Submit

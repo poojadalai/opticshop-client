@@ -149,6 +149,7 @@ export const orderData = (cart, id) => {
       dispatch(
         showMessageWithTimeout("success", false, response.data.message, 3000)
       );
+      localStorage.removeItem("cart");
       dispatch(appDoneLoading());
     } catch (e) {
       console.log(e.message);
@@ -213,15 +214,15 @@ export const deleteAddress = (addressId) => {
           },
         }
       );
-
+      console.log("Address deleted?", response.data);
       dispatch(deleteAdd(addressId));
       dispatch(
         showMessageWithTimeout("success", false, response.data.message, 3000)
       );
-      console.log("Address deleted?", response.data);
       dispatch(appDoneLoading());
     } catch (e) {
       console.error(e);
+      dispatch(appDoneLoading());
     }
   };
 };
