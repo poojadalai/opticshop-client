@@ -1,6 +1,6 @@
 import axios from "axios";
 import { appLoading, appDoneLoading } from "../appState/actions";
-
+import { apiUrl } from "../../config/constants";
 export const LIST_OF_PRODUCTS = "LIST_OF_PRODUCTS";
 export const PRODUCT_DETAILS = "ARTWORK_DETAILS";
 export const ADD_TO_CART = "ADD_TO_CART";
@@ -9,7 +9,7 @@ export const INCREASE_AMOUNT = "INCREASE_AMOUNT";
 export const DECREASE_AMOUNT = "DECREASE_AMOUNT";
 export const DELETE_CARTITEM = "DELETE_CARTITEM";
 export const CREATE_ORDER = "CREATE_ORDER";
-const API_URL = "http://localhost:4000";
+
 export const getListOfArtworks = (product) => ({
   type: LIST_OF_PRODUCTS,
   payload: product,
@@ -54,7 +54,7 @@ export const getProducts = () => {
   return async (dispatch, getState) => {
     dispatch(appLoading());
     try {
-      const products = await axios.get(`${API_URL}/products`);
+      const products = await axios.get(`${apiUrl}/products`);
       dispatch(getListOfArtworks(products.data));
       dispatch(appDoneLoading());
     } catch (e) {
@@ -69,7 +69,7 @@ export const getProductById = (id) => {
   return async (dispatch, getState) => {
     dispatch(appLoading());
     try {
-      const product = await axios.get(`${API_URL}/products/${id}`);
+      const product = await axios.get(`${apiUrl}/products/${id}`);
       dispatch(getArtworkDetails(product.data));
       dispatch(appDoneLoading());
     } catch (e) {
