@@ -20,7 +20,7 @@ The Optic Shop is an e-commerce app for glasses😎.
 - Bootstrap
 - Material UI
 
-## Deployed Version : <a href="https://627ce0300eab6c53837ff181--radiant-cuchufli-e873fe.netlify.app/">TheOpticShop</a>
+## Deployed Version : <a href="https://627e2a1c6b4e4f4a690a8c69--theopticshop.netlify.app/">TheOpticShop</a>
 ## Database Diagram
 
 ![alt text](src/db_diagram.png)
