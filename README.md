@@ -10,7 +10,6 @@ The Optic Shop is an e-commerce app for glasses😎.
 - Express
 - REST
 - Sequelize
-- Postgres
 - NodeJS
 
 2.FrontEnd
